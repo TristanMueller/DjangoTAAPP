@@ -13,6 +13,9 @@ class TASchedulingApp:
             for user in users:
                 if user.password == sPassword:
                     self.LoggedInUser = User(sUsername, sPassword, user.clearance)
+                    self.LoggedInUser.username = sUsername
+                    self.LoggedInUser.password = sPassword
+                    self.LoggedInUser.clearance = user.clearance
                     return True
             return False
         else:
@@ -119,3 +122,12 @@ class TASchedulingApp:
                 return False
         else:
             return False
+
+    def displayCoursesForProfessor(self):
+        out = ""
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance == 3:
+            courses = list(Courses.objects.filter(professor=self.LoggedInUser.username))
+            for course in courses:
+                out += "<p>(" + str(course.courseID) + ", " + course.coursename + ", " + course.professor + ")</p>"
+            return out
+        return "Could Not Display Courses"

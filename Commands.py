@@ -54,11 +54,15 @@ class CommandHandler():
 
         elif args[0] == "DisplayLabs":
             return app.displayLabs()
+
         elif args[0] == "EditCourse":
           if app.editCourse(args[1], args[2], args[3],args[4]):
               return "Edited Course"
           else:
               return "Could Not Edit Course"
+
+        elif args[0] == "DisplayMyCourses":
+            return app.displayCoursesForProfessor()
 
         elif args[0] == "Help":
             return commandlist()
@@ -77,6 +81,7 @@ def commandlist():
     out += "<p>DisplayAccounts</p>"
     out += "<p>DisplayCourses</p>"
     out += "<p>DisplayLabs</p>"
+    out += "<p>DisplayMyCourses</p>"
     return out
 
 
