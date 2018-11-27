@@ -62,7 +62,7 @@ class TASchedulingApp:
             return False
 
     def createLab(self, iLabID, iCourseId, sTA):
-        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 4:
             labs = list(Labs.objects.filter(LabID=iLabID))
             if len(labs) > 0:
                 return False
