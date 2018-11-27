@@ -66,17 +66,17 @@ class CommandHandler():
             return "Error"
 
 def commandlist():
-    out = ["Commands"]
-    out.append("Login <username> <password>")
-    out.append("Logout")
-    out.append("CreateAccount <username> <password> <clearance(1-4)>")
-    out.append("EditAccount <username> <new username> <new password> <new clearance(1-4)>")
-    out.append("CreateCourse <course ID> <course name> <professor name>")
-    out.append("CreateLab <lab ID> <course ID> <ta name>")
-    out.append("DeleteAccount <username>")
-    out.append("DisplayAccounts")
-    out.append("DisplayCourses")
-    out.append("DisplayLabs")
+    out = "<h1>Commands</h1>"
+    out += "<p>Login (username) (password)</p>"
+    out += "<p>Logout</p>"
+    out += "<p>CreateAccount (username) (password) (clearance(1-4))</p>"
+    out += "<p>EditAccount (username) (new username) (new password) (new clearance(1-4))</p>"
+    out += "<p>CreateCourse (course ID) (course name) (professor name)</p>"
+    out += "<p>CreateLab (lab ID) (course ID) (ta name)</p>"
+    out += "<p>DeleteAccount (username)</p>"
+    out += "<p>DisplayAccounts</p>"
+    out += "<p>DisplayCourses</p>"
+    out += "<p>DisplayLabs</p>"
     return out
 
 

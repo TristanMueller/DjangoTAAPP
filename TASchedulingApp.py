@@ -81,29 +81,29 @@ class TASchedulingApp:
         return "Could Not Delete Account"
 
     def displayAccounts(self):
-        out = []
+        out = ""
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
             users = list(User.objects.all())
             for user in users:
-                out.append("(" + user.username + ", " + user.password + ", " + str(user.clearance) + ")")
+                out += "<p>(" + user.username + ", " + user.password + ", " + str(user.clearance) + ")</p>"
             return out
         return "Could Not Display Accounts"
 
     def displayCourses(self):
-        out = []
+        out = ""
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
             courses = list(Courses.objects.all())
             for course in courses:
-                out.append("(" + str(course.courseID) + ", " + course.coursename + ", " + course.professor + ")")
+                out += "<p>(" + str(course.courseID) + ", " + course.coursename + ", " + course.professor + ")</p>"
             return out
         return "Could Not Display Courses"
 
     def displayLabs(self):
-        out = []
+        out = ""
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
             labs = list(Labs.objects.all())
             for lab in labs:
-                out.append("(" + str(lab.LabID) + ", " + str(lab.courseID) + ", " + lab.tausername + ")")
+                out += "<p>(" + str(lab.LabID) + ", " + str(lab.courseID) + ", " + lab.tausername + ")</p>"
             return out
         return "Could Not Display Labs"
 
