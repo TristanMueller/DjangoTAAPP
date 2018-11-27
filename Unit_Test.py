@@ -125,7 +125,7 @@ class Testcode(TestCase):
     self.App.logout()
     self.App.LoggedInUser = User("Admin", "Admin", 1)
     self.assertFalse(self.App.editCourse("235", "Example", "rock"))
-  
+
 #suite = TestCase.TestSuite()
 #suite.addTest(TestCase.makeSuite(Testcode))
 #runner = TestCase.TextTestRunner()
