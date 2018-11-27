@@ -128,7 +128,9 @@ class TASchedulingApp:
         if self.LoggedInUser is not None and self.LoggedInUser.clearance == 3:
             courses = list(Courses.objects.filter(professor=self.LoggedInUser.username))
             for course in courses:
-                out += "<p>(" + str(course.courseID) + ", " + course.coursename + ", " + course.professor + ")</p>"
+                out += "<p>Course: (" + str(course.courseID) + ", " + course.coursename + ", " + course.professor + ")</p>"
+                for lab in list(Labs.objects.filter(courseID=course.courseID)):
+                    out += "<p>Lab: (" + str(lab.LabID) + ", " + str(lab.courseID) + ", " + lab.tausername + ")</p>"
             return out
         return "Could Not Display Courses"
 
@@ -140,3 +142,16 @@ class TASchedulingApp:
                 out += "<p>(" + str(lab.LabID) + ", " + lab.courseID + ", " + lab.tausername + ")</p>"
             return out
         return "Could Not Display Courses"
+
+    def assignTAToLab(self, labid, tausername):
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance == 3:
+            labs = list(Labs.objects.filter(LabID=labid))
+            if len(labs) == 1:
+                Labs.objects.filter(LabID=labid).delete()
+                lab = Labs(labid, labs[0].courseID, tausername)
+                lab.save()
+            else:
+                return False
+        else:
+            return False
+

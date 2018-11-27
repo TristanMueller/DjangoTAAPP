@@ -34,8 +34,8 @@ class Testcode(TestCase):
 
   def test_create_account_successful(self):
   
-    self.App.LoggedInUser = User("Admin","Admin",1)
-    self.assertTrue(self.App.createAccount("Example","Example",3))
+    self.App.LoggedInUser = User("Admin", "Admin", 1)
+    self.assertTrue(self.App.createAccount("Example", "Example", 3))
 
   def test_create_account_existing(self):
     

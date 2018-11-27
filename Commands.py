@@ -56,10 +56,16 @@ class CommandHandler():
             return app.displayLabs()
 
         elif args[0] == "EditCourse":
-          if app.editCourse(args[1], args[2], args[3],args[4]):
-              return "Edited Course"
-          else:
-              return "Could Not Edit Course"
+            if app.editCourse(args[1], args[2], args[3],args[4]):
+                return "Edited Course"
+            else:
+                return "Could Not Edit Course"
+
+        elif args[0] == "AssignTAToLab":
+            if app.AssignTAToLab(args[1], args[2]):
+                return "Assigned TA To Lab"
+            else:
+                return "Could Not Assign TA To Lab"
 
         elif args[0] == "DisplayMyCourses":
             return app.displayCoursesForProfessor()
