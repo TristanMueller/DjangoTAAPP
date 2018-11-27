@@ -1,8 +1,8 @@
-import unittest
+from django.test import TestCase
 from TASchedulingApp import TASchedulingApp
 from User import User
 
-class Testcode(unittest.TestCase):
+class Testcode(TestCase):
 
   
   App = TASchedulingApp()
@@ -126,11 +126,11 @@ class Testcode(unittest.TestCase):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
     self.assertFalse(self.App.editCourse("235", "Example", "rock"))
   
-suite = unittest.TestSuite()
-suite.addTest(unittest.makeSuite(Testcode))
-runner = unittest.TextTestRunner()
-res=runner.run(suite)
-print(res)
-print("*"*20)
-for i in res.failures:
-    print(i[1])
+#suite = TestCase.TestSuite()
+#suite.addTest(TestCase.makeSuite(Testcode))
+#runner = TestCase.TextTestRunner()
+#res=runner.run(suite)
+#print(res)
+#print("*"*20)
+#for i in res.failures:
+   # print(i[1])

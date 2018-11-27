@@ -111,7 +111,7 @@ class TASchedulingApp:
         return "Could Not Display Labs"
 
     def editCourse(self, uniqId, newUniqId, coursename, professor):
-        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 2:
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
             courses = list(Courses.objects.filter(courseID=uniqId))
             if len(courses) == 1:
                 Courses.objects.filter(courseID=uniqId).delete()
