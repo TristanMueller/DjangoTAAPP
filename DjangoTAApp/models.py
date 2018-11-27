@@ -15,3 +15,8 @@ class Labs(models.Model):
     courseID = models.CharField(max_length=20)
     tausername = models.CharField(max_length=20)
 
+class Contacts(models.Model):
+    instructor = models.IntegerField(default=0)
+    phone = models.CharField(max_length=20)
+    email = models.CharField(max_length=20)
+

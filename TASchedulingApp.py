@@ -1,6 +1,6 @@
 from User import User
 from Course import Course
-from DjangoTAApp.models import User, Courses, Labs
+from DjangoTAApp.models import User, Courses, Contacts, Labs
 
 class TASchedulingApp:
     LoggedInUser = None
@@ -72,13 +72,11 @@ class TASchedulingApp:
 
 
     def deleteAccount(self, sUsername):
-        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
-            if len(list(User.objects.filter(username=sUsername))) > 0:
-                User.objects.filter(username=sUsername).delete()
-                return True
-            else:
-                return False
-        return "Could Not Delete Account"
+        if len(list(User.objects.filter(username=sUsername))) > 0:
+            User.objects.filter(username=sUsername).delete()
+            return True
+        else:
+            return False
 
     def displayAccounts(self):
         out = []
@@ -107,13 +105,49 @@ class TASchedulingApp:
             return out
         return "Could Not Display Labs"
 
-    def editCourse(self, uniqId, newUniqId, coursename, professor):
+    def editCourse(self, uniqId, coursename, professor):
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 2:
-            courses = list(Courses.objects.filter(courseID=uniqId))
+            courses = list(Courses.objects.filter(username=uniqId))
             if len(courses) == 1:
                 Courses.objects.filter(courseID=uniqId).delete()
-                course = Courses(courseID=newUniqId, coursename=coursename, professor=professor)
+                course = Courses(courseID=uniqId, coursename=coursename, professor=professor)
                 course.save()
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def editContactInfo(self, uniqId, name, phonenumber, email):
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
+            contacts = list(Contacts.objects.filter(username=uniqId))
+            if len(contacts) == 1:
+                Contacts.objects.filter(instructor=name).delete()
+                contact = Contacts(instructor=name, phone=phonenumber, email=email)
+                contact.save()
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def createContact(self, sName, sNumber, sEmail):
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
+            contacts = list(Contacts.objects.filter(instructor=sName))
+            if len(contacts) > 0:
+                return False
+            else:
+                contact = Contacts(instructor=sName, phone=sNumber, email=sEmail)
+                contact.save()
+                return True
+
+    def editContact(self, sName, sNewName, sNewNumber, sNewEmail):
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
+            contacts = list(Contacts.objects.filter(instructor=sName))
+            if len(contacts) == 1:
+                Contacts.objects.filter(instructor=sName).delete()
+                c1 = Contacts(instructor=sNewName, phone=sNewNumber, email=sNewEmail)
+                c1.save()
                 return True
             else:
                 return False

@@ -1,5 +1,5 @@
 from TASchedulingApp import TASchedulingApp
-from DjangoTAApp.models import User, Courses, Labs
+from DjangoTAApp.models import User, Courses, Contacts, Labs
 
 app = TASchedulingApp()
 
@@ -54,11 +54,24 @@ class CommandHandler():
 
         elif args[0] == "DisplayLabs":
             return app.displayLabs()
+
         elif args[0] == "EditCourse":
-          if app.editCourse(args[1], args[2], args[3],args[4]):
+          if app.editCourse(args[1], args[2], args[3]):
               return "Edited Course"
           else:
               return "Could Not Edit Course"
+
+        elif args[0] == "CreateContact":
+            if app.createContact(args[1], args[2], args[3]):
+                return "Created New Contact"
+            else:
+                return "Could Not Create New Contact"
+
+        elif args[0] == "EditContact":
+          if app.editContact(args[1], args[2], args[3], args[4]):
+              return "Edited Contact"
+          else:
+              return "Could Not Edit Contact"
 
         elif args[0] == "Help":
             return commandlist()
