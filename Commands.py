@@ -64,6 +64,9 @@ class CommandHandler():
         elif args[0] == "DisplayMyCourses":
             return app.displayCoursesForProfessor()
 
+        elif args[0] == "DisplayMyLabs":
+            return app.displayLabsForTA()
+
         elif args[0] == "Help":
             return commandlist()
         else:
@@ -82,6 +85,7 @@ def commandlist():
     out += "<p>DisplayCourses</p>"
     out += "<p>DisplayLabs</p>"
     out += "<p>DisplayMyCourses</p>"
+    out += "<p>DisplayMyLabs</p>"
     return out
 
 

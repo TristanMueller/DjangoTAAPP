@@ -131,3 +131,12 @@ class TASchedulingApp:
                 out += "<p>(" + str(course.courseID) + ", " + course.coursename + ", " + course.professor + ")</p>"
             return out
         return "Could Not Display Courses"
+
+    def displayLabsForTA(self):
+        out = ""
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance == 4:
+            labs = list(Labs.objects.filter(tausername=self.LoggedInUser.username))
+            for lab in labs:
+                out += "<p>(" + str(lab.LabID) + ", " + lab.courseID + ", " + lab.tausername + ")</p>"
+            return out
+        return "Could Not Display Courses"
