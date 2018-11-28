@@ -10,7 +10,7 @@
     {% for o in listed %}
         <p>{{ o }}</p>
     {% endfor %}
-    <div id="out">{{out}}</div>
+    <div id="out">{{out | safe }}</div>
 </head>
 <body>
 

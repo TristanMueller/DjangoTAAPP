@@ -1,5 +1,5 @@
 from TASchedulingApp import TASchedulingApp
-from DjangoTAApp.models import User, Courses, Contacts, Labs
+from DjangoTAApp.models import User, Courses, Labs
 
 app = TASchedulingApp()
 
@@ -56,22 +56,22 @@ class CommandHandler():
             return app.displayLabs()
 
         elif args[0] == "EditCourse":
-          if app.editCourse(args[1], args[2], args[3]):
-              return "Edited Course"
-          else:
-              return "Could Not Edit Course"
-
-        elif args[0] == "CreateContact":
-            if app.createContact(args[1], args[2], args[3]):
-                return "Created New Contact"
+            if app.editCourse(args[1], args[2], args[3],args[4]):
+                return "Edited Course"
             else:
-                return "Could Not Create New Contact"
+                return "Could Not Edit Course"
 
-        elif args[0] == "EditContact":
-          if app.editContact(args[1], args[2], args[3], args[4]):
-              return "Edited Contact"
-          else:
-              return "Could Not Edit Contact"
+        elif args[0] == "AssignTAToLab":
+            if app.AssignTAToLab(args[1], args[2]):
+                return "Assigned TA To Lab"
+            else:
+                return "Could Not Assign TA To Lab"
+
+        elif args[0] == "DisplayMyCourses":
+            return app.displayCoursesForProfessor()
+
+        elif args[0] == "DisplayMyLabs":
+            return app.displayLabsForTA()
 
         elif args[0] == "Help":
             return commandlist()
@@ -79,17 +79,19 @@ class CommandHandler():
             return "Error"
 
 def commandlist():
-    out = ["Commands"]
-    out.append("Login <username> <password>")
-    out.append("Logout")
-    out.append("CreateAccount <username> <password> <clearance(1-4)>")
-    out.append("EditAccount <username> <new username> <new password> <new clearance(1-4)>")
-    out.append("CreateCourse <course ID> <course name> <professor name>")
-    out.append("CreateLab <lab ID> <course ID> <ta name>")
-    out.append("DeleteAccount <username>")
-    out.append("DisplayAccounts")
-    out.append("DisplayCourses")
-    out.append("DisplayLabs")
+    out = "<h1>Commands</h1>"
+    out += "<p>Login (username) (password)</p>"
+    out += "<p>Logout</p>"
+    out += "<p>CreateAccount (username) (password) (clearance(1-4))</p>"
+    out += "<p>EditAccount (username) (new username) (new password) (new clearance(1-4))</p>"
+    out += "<p>CreateCourse (course ID) (course name) (professor name)</p>"
+    out += "<p>CreateLab (lab ID) (course ID) (ta name)</p>"
+    out += "<p>DeleteAccount (username)</p>"
+    out += "<p>DisplayAccounts</p>"
+    out += "<p>DisplayCourses</p>"
+    out += "<p>DisplayLabs</p>"
+    out += "<p>DisplayMyCourses</p>"
+    out += "<p>DisplayMyLabs</p>"
     return out
 
 
