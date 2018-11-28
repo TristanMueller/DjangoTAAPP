@@ -64,12 +64,14 @@ class TASchedulingApp:
     def createLab(self, iLabID, iCourseId, sTA):
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 4:
             labs = list(Labs.objects.filter(LabID=iLabID))
-            if len(labs) > 0:
-                return False
-            else:
+            courses = list(Courses.objects.filter(courseID=iCourseId))
+            if len(labs) == 0 and len(courses) > 0:
                 lab = Labs(LabID=iLabID, courseID=iCourseId, tausername=sTA)
                 lab.save()
                 return True
+            else:
+
+                return False
         else:
             return False
 
@@ -146,10 +148,12 @@ class TASchedulingApp:
     def assignTAToLab(self, labid, tausername):
         if self.LoggedInUser is not None and self.LoggedInUser.clearance == 3:
             labs = list(Labs.objects.filter(LabID=labid))
-            if len(labs) == 1:
+            ta = list(User.objects.filter(username=tausername))
+            if len(labs) == 1 and len(ta) == 1:
                 Labs.objects.filter(LabID=labid).delete()
                 lab = Labs(labid, labs[0].courseID, tausername)
                 lab.save()
+                return True
             else:
                 return False
         else:

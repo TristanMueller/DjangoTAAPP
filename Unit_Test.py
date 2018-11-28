@@ -9,27 +9,30 @@ class Testcode(TestCase):
   def test_create_lab_invalid_login(self):
     
     self.App.LoggedInUser is None
-    self.assertEqual("Invalid command", self.App.createLab("John", "361", "1"))
+    self.assertFalse(self.App.createLab("John", "361", "1"))
   
   def test_create_lab_invalid_clearance(self):
     
-    self.App.LoggedInUser = User("TA", "TA", )
-    self.assertEqual("Invalid command", self.App.createLab("John", "361", "1"))
+    self.App.LoggedInUser = User("TA", "TA", 4)
+    self.assertFalse(self.App.createLab("John", "361", "1"))
   
   def test_create_lab_succesful(self):
     
     self.App.LoggedInUser = User("Admin", "Admin", 1)
-    self.assertEqual("Lab Created", self.App.createLab("John", "361", "1"))
+    self.App.createAccount("mark", "mark", 3)
+    self.App.createCourse("1000", "CS999", "mark")
+    self.App.createAccount("Bill", "Bill", 4)
+    self.assertTrue(self.App.createLab("1", "1000", "Bill"))
 
   def test_create_lab_no_class(self):
     
-    self.App.LoggedInUser = User("Admin","Admin",1)
-    self.assertEqual("Course does not exist", self.App.createLab("John", "431", "1"))
+    self.App.LoggedInUser = User("Admin", "Admin", 1)
+    self.assertFalse(self.App.createLab("1", "431", "John"))
 
-  def test_create_lab_succesful(self):
+  def test_create_lab_no_TA(self):
     
     self.App.LoggedInUser = User("Admin", "Admin", 1)
-    self.assertEqual("TA does not exist", self.App.createLab("Jim", "361", "1"))
+    self.assertFalse(self.App.createLab("1", "361", "Jim"))
   
 
   def test_create_account_successful(self):
@@ -57,8 +60,10 @@ class Testcode(TestCase):
 
 
   def test_login_successful(self):
-    self.App.LoggedInUser = None
-    self.assertTrue(self.App.login("Admin","Admin"))
+    self.App.LoggedInUser = User("Admin", "Admin", 1)
+    self.App.createAccount("matt", "matt", 3)
+    self.App.logout()
+    self.assertTrue(self.App.login("matt", "matt"))
 
   def test_login_unsuccessful(self):
     self.App.LoggedInUser = None
@@ -79,12 +84,12 @@ class Testcode(TestCase):
   def test_delete_account_invalid(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
     self.assertFalse(self.App.deleteAccount("jack"))
+
   def test_delete_account_valid(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
-    file_object = open("Accounts.txt", "a")
-    file_object.write("bob,bob,2")
-    file_object.close()
+    self.App.createAccount("bob", "bob", 2)
     self.assertTrue(self.App.deleteAccount("bob"))
+
   def test_delete_account_invalid_clearance(self):
     self.App.LoggedInUser = User("TA", "TA", 4)
     self.assertEquals(self.App.deleteAccount("jack"), "Could Not Delete Account")
@@ -92,39 +97,47 @@ class Testcode(TestCase):
     #Brandon's
   def test_edit_user_success(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
-    self.assertEqual(self.App.editAccount("Admin", "Lol", "Admin", "1"), "Edited Account") #should be user that doesn't exist
+    self.App.createAccount("billy", "billy", 2)
+    self.assertTrue(self.App.editAccount("billy", "pauly", "billy", "2")) #should be user that doesn't exist
+
   def test_edit_pass_success(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
-    self.assertEqual(self.App.editAccount("Admin", "Admin", "Lol", "1"), "Edited Account") #should be valid password
+    self.App.createAccount("paul", "paul", 4)
+    self.assertTrue(self.App.editAccount("paul", "paul", "Lol", "4")) #should be valid password
+
   def test_edit_clearance_success(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
-    self.assertEqual(self.App.editAccount("Admin", "Admin", "Lol", "1"), "Edited Account") #should be valid clearance
+    self.App.createAccount("brandon", "brandon", 3)
+    self.assertTrue(self.App.editAccount("brandon", "isaiah", "isaiah", "2")) #should be valid clearance
+
   def test_edit_user_fail(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
-    self.assertEqual(self.App.editAccount("Admin", "TA1", "Admin", "1"), "Invalid command or insufficient access") #should be user that does exist
+    self.assertFalse(self.App.editAccount("Admin", "TA1", "Admin", "1")) #should be user that does exist
+
   def test_edit_pass_fail(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
-    self.assertEqual(self.App.editAccount("Admin", "Admin", "", "1"), "Invalid command or insufficient access") #should be invalid password
+    self.assertFalse(self.App.editAccount("Admin", "Admin", "", "1")) #should be invalid password
+
   def test_edit_clearance_fail(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
-    self.assertEqual(self.App.editAccount("Admin", "Admin", "Lol", "37"), "Invalid command or insufficient access") #should be invalid clearance
+    self.assertFalse(self.App.editAccount("Admin", "Admin", "Lol", "37")) #should be invalid clearance
 
   #tests definitely need some work. I'm having trouble with unit tests.
 
   def test_edit_course_successful(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
     self.App.createCourse("234", "Example", "rock")
-    self.assertTrue(self.App.editCourse("234", "Example2", "sorenson"))
+    self.assertTrue(self.App.editCourse("234", "235", "Example2", "sorenson"))
 
   def test_edit_course_unsuccessful(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
     self.App.createCourse("234", "Example", "rock")
     self.App.logout()
     self.App.LoggedInUser = User("TA", "TA", 4)
-    self.assertFalse(self.App.editCourse("234", "Example", "rock"))
-    self.App.logout()
-    self.App.LoggedInUser = User("Admin", "Admin", 1)
-    self.assertFalse(self.App.editCourse("235", "Example", "rock"))
+    self.assertFalse(self.App.editCourse("234", "235", "Example", "rock"))
+    #self.App.logout()
+    #self.App.LoggedInUser = User("Admin", "Admin", 1)
+    #self.assertFalse(self.App.editCourse("235", "Example", "rock"))
 
   def test_AssignTAToLab_valid(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
