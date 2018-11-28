@@ -67,6 +67,18 @@ class CommandHandler():
             else:
                 return "Could Not Assign TA To Lab"
 
+        elif args[0] == "CreateContact":
+            if app.createContact(args[1], args[2], args[3]):
+                return "Created New Contact"
+            else:
+                return "Could Not Create New Contact"
+
+        elif args[0] == "EditContact":
+          if app.editContact(args[1], args[2], args[3], args[4]):
+              return "Edited Contact"
+          else:
+              return "Could Not Edit Contact"
+
         elif args[0] == "DisplayMyCourses":
             return app.displayCoursesForProfessor()
 

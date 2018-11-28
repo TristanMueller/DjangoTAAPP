@@ -1,6 +1,6 @@
 from User import User
 from Course import Course
-from DjangoTAApp.models import User, Courses, Labs
+from DjangoTAApp.models import User, Courses, Labs, Contacts
 
 class TASchedulingApp:
     LoggedInUser = None
@@ -159,3 +159,26 @@ class TASchedulingApp:
         else:
             return False
 
+#brandon's stuff
+    def createContact(self, sName, sNumber, sEmail):
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
+            contacts = list(Contacts.objects.filter(instructor=sName))
+            if len(contacts) > 0:
+                return False
+            else:
+                contact = Contacts(instructor=sName, phone=sNumber, email=sEmail)
+                contact.save()
+                return True
+
+    def editContact(self, sName, sNewName, sNewNumber, sNewEmail):
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
+            contacts = list(Contacts.objects.filter(instructor=sName))
+            if len(contacts) == 1:
+                Contacts.objects.filter(instructor=sName).delete()
+                c1 = Contacts(instructor=sNewName, phone=sNewNumber, email=sNewEmail)
+                c1.save()
+                return True
+            else:
+                return False
+        else:
+            return False
