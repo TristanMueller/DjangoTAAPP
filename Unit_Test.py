@@ -124,20 +124,59 @@ class Testcode(TestCase):
 
   #tests definitely need some work. I'm having trouble with unit tests.
 
+
+#Isaiah's tests
   def test_edit_course_successful(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
     self.App.createCourse("234", "Example", "rock")
-    self.assertTrue(self.App.editCourse("234", "235", "Example2", "sorenson"))
+    self.assertTrue(self.App.editCourse("234", "235", "Example2", "Sorenson"))
 
-  def test_edit_course_unsuccessful(self):
+  def test_edit_course_invalid_login(self):
+    self.App.LoggedInUser is None
+    self.assertFalse(self.App.editCourse("234", "235", "Example", "rock"))
+
+  def test_edit_course_invalid_clearance(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
     self.App.createCourse("234", "Example", "rock")
     self.App.logout()
     self.App.LoggedInUser = User("TA", "TA", 4)
     self.assertFalse(self.App.editCourse("234", "235", "Example", "rock"))
-    #self.App.logout()
-    #self.App.LoggedInUser = User("Admin", "Admin", 1)
-    #self.assertFalse(self.App.editCourse("235", "Example", "rock"))
+    self.App.logout()
+
+  def test_edit_course_invalid_professor(self):
+    self.App.LoggedInUser = User("Admin", "Admin", 1)
+    self.App.createCourse("234", "Example", "rock")
+    self.assertFalse(self.App.editCourse("234", "235", "Example", "john"))
+    self.App.logout()
+
+  def test_edit_course_invalid_old_uniqueId(self):
+    self.App.LoggedInUser = User("Admin", "Admin", 1)
+    self.App.createCourse("234", "Example", "rock")
+    self.assertFalse(self.App.editCourse("236", "235", "Example", "Sorenson"))
+    self.App.logout()
+
+  def test_edit_course_new_uniqueId_exists(self):
+    self.App.LoggedInUser = User("Admin", "Admin", 1)
+    self.App.createCourse("234", "Example", "rock")
+    self.App.createCourse("235", "Example2", "rock")
+    self.assertFalse(self.App.editCourse("234", "235", "Example3", "Sorenson"))
+    self.App.logout()
+
+  def test_edit_course_new_coursename_exists(self):
+    self.App.LoggedInUser = User("Admin", "Admin", 1)
+    self.App.createCourse("234", "Example", "rock")
+    self.App.createCourse("235", "Example2", "rock")
+    self.assertFalse(self.App.editCourse("234", "236", "Example2", "Sorenson"))
+
+  def test_create_lab_already_exists(self):
+    self.App.LoggedInUser = User("Admin", "Admin", 1)
+    self.App.createAccount("mark", "mark", 3)
+    self.App.createCourse("1000", "CS999", "mark")
+    self.App.createAccount("Bill", "Bill", 4)
+    self.App.createLab("1", "1000", "Bill")
+    self.assertFalse(self.App.createLab("1", "1000", "Bill"))
+# Isaiah's tests ends
+
 
   def test_AssignTAToLab_valid(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
