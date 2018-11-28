@@ -1,5 +1,5 @@
 from TASchedulingApp import TASchedulingApp
-from DjangoTAApp.models import User, Courses, Labs
+from DjangoTAApp.models import User, Courses, Labs, Contacts
 
 app = TASchedulingApp()
 

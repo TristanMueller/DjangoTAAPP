@@ -38,4 +38,13 @@ class Migration(migrations.Migration):
                 ('tausername', models.CharField(max_length=20)),
             ],
         ),
+        migrations.CreateModel(
+            name='Contacts',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('instructor', models.IntegerField(default=0)),
+                ('phone', models.CharField(max_length=20)),
+                ('email', models.CharField(max_length=20)),
+            ],
+        )
     ]

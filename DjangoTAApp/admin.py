@@ -6,3 +6,5 @@ from .models import Courses
 admin.site.register(Courses)
 from .models import Labs
 admin.site.register(Labs)
+from .models import Contacts
+admin.site.register(Contacts)
