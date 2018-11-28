@@ -98,6 +98,8 @@ def commandlist():
     out += "<p>EditAccount (username) (new username) (new password) (new clearance(1-4))</p>"
     out += "<p>CreateCourse (course ID) (course name) (professor name)</p>"
     out += "<p>CreateLab (lab ID) (course ID) (ta name)</p>"
+    out += "<p>CreateContact (instructor ID #) (phone #) (e-mail)</p>"
+    out += "<p>EditContact (old instructor ID #) (new instructor ID #) (new phone #) (new e-mail)</p>"
     out += "<p>DeleteAccount (username)</p>"
     out += "<p>DisplayAccounts</p>"
     out += "<p>DisplayCourses</p>"
