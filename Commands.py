@@ -79,6 +79,9 @@ class CommandHandler():
           else:
               return "Could Not Edit Contact"
 
+        elif args[0] == "DisplayContacts":
+            return app.displayContacts()
+
         elif args[0] == "DisplayMyCourses":
             return app.displayCoursesForProfessor()
 
@@ -100,6 +103,7 @@ def commandlist():
     out += "<p>CreateLab (lab ID) (course ID) (ta name)</p>"
     out += "<p>CreateContact (instructor ID #) (phone #) (e-mail)</p>"
     out += "<p>EditContact (old instructor ID #) (new instructor ID #) (new phone #) (new e-mail)</p>"
+    out += "<p>DisplayContacts</p>"
     out += "<p>DeleteAccount (username)</p>"
     out += "<p>DisplayAccounts</p>"
     out += "<p>DisplayCourses</p>"

@@ -182,3 +182,12 @@ class TASchedulingApp:
                 return False
         else:
             return False
+
+    def displayContacts(self):
+        out = ""
+        if self.LoggedInUser is not None:
+            contacts = list(Contacts.objects.all())
+            for contact in contacts:
+                out += "<p>Contacts: ID - " + str(contact.instructor) + ", Phone - " + contact.phone + ", Email - " + contact.email + "</p>"
+            return out
+        return "Could Not Display Courses"
