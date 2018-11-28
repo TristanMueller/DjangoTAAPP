@@ -114,8 +114,11 @@ class TASchedulingApp:
 
     def editCourse(self, uniqId, newUniqId, coursename, professor):
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
-            courses = list(Courses.objects.filter(courseID=uniqId))
-            if len(courses) == 1:
+            coursesId = list(Courses.objects.filter(courseID=uniqId))
+            coursesNid = list(Courses.objects.filter(courseID=newUniqId))
+            coursesName = list(Courses.objects.filter(coursename=coursename))
+            professors = list(User.objects.filter(username=professor))
+            if len(coursesId) == 1 and len(coursesNid) == 0 and len(coursesName) == 0 and len(professors) == 1:
                 Courses.objects.filter(courseID=uniqId).delete()
                 course = Courses(courseID=newUniqId, coursename=coursename, professor=professor)
                 course.save()

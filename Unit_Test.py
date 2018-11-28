@@ -129,6 +129,7 @@ class Testcode(TestCase):
   def test_edit_course_successful(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
     self.App.createCourse("234", "Example", "rock")
+    self.App.createAccount("Sorenson","password",3)
     self.assertTrue(self.App.editCourse("234", "235", "Example2", "Sorenson"))
 
   def test_edit_course_invalid_login(self):
@@ -146,7 +147,7 @@ class Testcode(TestCase):
   def test_edit_course_invalid_professor(self):
     self.App.LoggedInUser = User("Admin", "Admin", 1)
     self.App.createCourse("234", "Example", "rock")
-    self.assertFalse(self.App.editCourse("234", "235", "Example", "john"))
+    self.assertFalse(self.App.editCourse("234", "235", "Example2", "john"))
     self.App.logout()
 
   def test_edit_course_invalid_old_uniqueId(self):
