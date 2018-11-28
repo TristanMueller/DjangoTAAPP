@@ -220,6 +220,13 @@ class Testcode(TestCase):
     self.App.createLab("001", "12345", "")
     self.assertFalse(self.App.assignTAToLab("001", "Assistant"))
 
+  #contacts#
+
+  def test_ContactInfo_invalid_info(self):
+    self.App.LoggedInUser = User("Admin", "Admin", 1)
+    self.App.createAccount("bob", "bob", 3)
+    self.App.createContact(8, "2624736485", "sheep@jeep.com")
+    self.assertFalse(self.App.editAccount(7, 8, "2527364823", "boop.com"))
 
 #suite = TestCase.TestSuite()
 #suite.addTest(TestCase.makeSuite(Testcode))
