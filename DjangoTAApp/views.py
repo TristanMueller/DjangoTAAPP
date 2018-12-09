@@ -7,6 +7,21 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 com = CommandHandler()
 
+class Login(View):
+
+    def get(self, request):
+        return render(request, "Login.html", {'out': ""})
+
+    def post(self, request):
+        username = request.POST["username"]
+        password = request.POST["password"]
+        out = com.command(["Login", username, password])
+        if out != "Logged In":
+            return render(request, "Login.html", {'out': out})
+        else:
+            return HttpResponseRedirect("Home/")
+
+
 class Home(View):
 
     def get(self, request):

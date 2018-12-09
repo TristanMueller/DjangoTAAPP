@@ -18,7 +18,9 @@ from django.contrib import admin
 admin.autodiscover()
 from django.urls import path
 from DjangoTAApp.views import Home
+from DjangoTAApp.views import Login
 
 urlpatterns = [
-    path('', Home.as_view()),
+    path('', Login.as_view()),
+    path('Home/', Home.as_view()),
 ]

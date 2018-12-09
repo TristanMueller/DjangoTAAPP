@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>TASchedulingApp</title>
-    <form method="post" action="/Home/">
+    <form method="post" action="/">
         {% csrf_token %}
-        command: <input type="text" name="command"/><input type="submit"/>
+        Username:<input type="text" name="username"/> Password:<input type="text" name="password"/><input type="submit"/>
     </form>
     <div id="out">{{out | safe }}</div>
 </head>
