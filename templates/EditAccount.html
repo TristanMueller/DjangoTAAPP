@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TASchedulingApp</title>
+</head>
+<body>
+        {% for user in users %}
+            <div>
+                <form method="post" action="/Home/EditAccount/">
+                    {% csrf_token %}
+                    <input type="hidden" name="oldusername" value={{ user.username }}><input type="text" name="username"value={{ user.username }}><input type="text" name="password"value={{ user.password }}><input type="text" name="clearance"value={{ user.clearance }}><input type="submit"/>
+                </form>
+            </div>
+        {% endfor %}
+    </ul>
+        <button><a href="/Home">Back To Home</a></button>
+    <div id="out">{{out | safe }}</div>
+
+</body>
+</html>

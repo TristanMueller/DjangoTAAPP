@@ -3,6 +3,7 @@ from django.views import View
 from Commands import CommandHandler
 from django.shortcuts import redirect
 from django.http import HttpResponseRedirect
+from DjangoTAApp.models import  User
 
 # Create your views here.
 com = CommandHandler()
@@ -28,5 +29,24 @@ class Home(View):
         return render(request, "Main.html", {'out': ""})
 
     def post(self, request):
-        out = com.command(request.POST["command"].split())
+        post = request.POST["command"]
+        if post == "EditAccount":
+            return HttpResponseRedirect("EditAccount/")
+
+        out = com.command(post.split())
         return render(request, "Main.html", {'out': out})
+
+class EditAccount(View):
+
+    def get(self, request):
+        users = list(User.objects.all())
+        return render(request, "EditAccount.html", {'users': users, 'out': ""})
+
+    def post(self, request):
+        oldusername = request.POST["oldusername"]
+        username = request.POST["username"]
+        password = request.POST["password"]
+        clearance = request.POST["clearance"]
+        out = com.command(["EditAccount", oldusername, username, password, clearance])
+        users = list(User.objects.all())
+        return render(request, "EditAccount.html", {'users': users, 'out': out})

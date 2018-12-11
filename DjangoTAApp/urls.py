@@ -19,8 +19,10 @@ admin.autodiscover()
 from django.urls import path
 from DjangoTAApp.views import Home
 from DjangoTAApp.views import Login
+from DjangoTAApp.views import EditAccount
 
 urlpatterns = [
     path('', Login.as_view()),
     path('Home/', Home.as_view()),
+    path('Home/EditAccount/', EditAccount.as_view()),
 ]

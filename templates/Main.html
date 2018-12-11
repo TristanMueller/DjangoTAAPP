@@ -7,6 +7,10 @@
         {% csrf_token %}
         command: <input type="text" name="command"/><input type="submit"/>
     </form>
+    <form method="post" action="/Home/">
+        {% csrf_token %}
+        <input name="command" value ="Logout" type="submit"/>
+    </form>
     <div id="out">{{out | safe }}</div>
 </head>
 <body>
