@@ -176,7 +176,89 @@ class Testcode(TestCase):
     self.App.createAccount("Bill", "Bill", 4)
     self.App.createLab("1", "1000", "Bill")
     self.assertFalse(self.App.createLab("1", "1000", "Bill"))
-# Isaiah's tests ends
+
+  def test_display_ta_assignments_sucessful(self):
+    self.App.LoggedInUser = User("TA","TA",4)
+    x= self.App.displayTAAssignments() != "Could Not Display TA Assignments"
+    self.assertTrue(x)
+  def test_display_ta_assignments_invalid_user(self):
+    self.App.LoggedInUser = User("Admin","Admin",1)
+    x= self.App.displayTAAssignments() == "Could Not Display TA Assignments"
+    self.assertTrue(x)
+  def test_display_ta_assignments_no_user(self):
+    x= self.App.displayTAAssignments() == "Could Not Display TA Assignments"
+    self.assertTrue(x)
+  def test_display_accounts_sucessful(self):
+    self.App.LoggedInUser = User("Admin","Admin",1)
+    x= self.App.displayAccounts() != "Could Not Display Accounts"
+    self.assertTrue(x)
+  def test_display_accounts_invalid_user(self):
+    self.App.LoggedInUser = User("TA","TA",4)
+    x = self.App.displayAccounts() == "Could Not Display Accounts"
+    self.assertTrue(x)
+  def test_display_accounts_no_user(self):
+    x = self.App.displayAccounts() == "Could Not Display Accounts"
+    self.assertTrue(x)
+  def test_display_courses_sucessful(self):
+    self.App.LoggedInUser = User("Admin","Admin",1)
+    x= self.App.displayCourses() != "Could Not Display Courses"
+    self.assertTrue(x)
+  def test_display_courses_invalid_user(self):
+    self.App.LoggedInUser = User("TA","TA",4)
+    x = self.App.displayCourses() == "Could Not Display Courses"
+    self.assertTrue(x)
+  def test_display_courses_no_user(self):
+    x = self.App.displayCourses() == "Could Not Display Courses"
+    self.assertTrue(x)
+
+  def test_display_labs_sucessful(self):
+    self.App.LoggedInUser = User("Admin","Admin",1)
+    x= self.App.displayLabs() != "Could Not Display Labs"
+    self.assertTrue(x)
+  def test_display_labs_invalid_user(self):
+    self.App.LoggedInUser = User("TA","TA",4)
+    x = self.App.displayLabs() == "Could Not Display Labs"
+    self.assertTrue(x)
+  def test_display_labs_no_user(self):
+    x = self.App.displayLabs() == "Could Not Display Labs"
+    self.assertTrue(x)
+
+  def test_display_courses_for_professor_sucessful(self):
+    self.App.LoggedInUser = User("Professor","Professor",3)
+    x= self.App.displayCoursesForProfessor() != "Could Not Display Courses"
+    self.assertTrue(x)
+  def test_display_courses_for_professor_invalid_user(self):
+    self.App.LoggedInUser = User("TA","TA",4)
+    x = self.App.displayCoursesForProfessor() == "Could Not Display Courses"
+    self.assertTrue(x)
+  def test_display_courses_for_professor_no_user(self):
+    x = self.App.displayCoursesForProfessor() == "Could Not Display Courses"
+    self.assertTrue(x)
+
+  def test_display_labs_for_ta_sucessful(self):
+    self.App.LoggedInUser = User("TA", "TA", 4)
+    x = self.App.displayLabsForTA() != "Could Not Display Labs"
+    self.assertTrue(x)
+
+  def test_display_labs_for_ta_invalid_user(self):
+    self.App.LoggedInUser = User("Professor", "Professor", 3)
+    x = self.App.displayLabsForTA() == "Could Not Display Labs"
+    self.assertTrue(x)
+
+  def test_display_labs_for_ta_no_user(self):
+    x = self.App.displayLabsForTA() == "Could Not Display Labs"
+    self.assertTrue(x)
+
+  def test_display_contacts_sucessful(self):
+    self.App.LoggedInUser = User("Admin", "Admin", 1)
+    x = self.App.displayContacts() != "Could Not Display Contacts"
+    self.assertTrue(x)
+
+  def test_display_contacts_no_user(self):
+    self.App.LoggedInUser = None
+    x = self.App.displayContacts() == "Could Not Display Contacts"
+    self.assertTrue(x)
+  # Isaiah's tests ends
 
 
   def test_AssignTAToLab_valid(self):

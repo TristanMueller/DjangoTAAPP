@@ -88,6 +88,9 @@ class CommandHandler():
         elif args[0] == "DisplayMyLabs":
             return app.displayLabsForTA()
 
+        elif args[0] == "DisplayTAAssignments":
+            return app.displayTAAssignments()
+
         elif args[0] == "Help":
             return commandlist()
         else:

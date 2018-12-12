@@ -146,7 +146,7 @@ class TASchedulingApp:
             for lab in labs:
                 out += "<p>(" + str(lab.LabID) + ", " + lab.courseID + ", " + lab.tausername + ")</p>"
             return out
-        return "Could Not Display Courses"
+        return "Could Not Display Labs"
 
     def assignTAToLab(self, labid, tausername):
         if self.LoggedInUser is not None and self.LoggedInUser.clearance == 3:
@@ -193,4 +193,12 @@ class TASchedulingApp:
             for contact in contacts:
                 out += "<p>Contacts: ID - " + str(contact.instructor) + ", Phone - " + contact.phone + ", Email - " + contact.email + "</p>"
             return out
-        return "Could Not Display Courses"
+        return "Could Not Display Contacts"
+    def displayTAAssignments(self):
+        out = ""
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance == 4:
+            TAs = list(Labs.objects.all())
+            for TA in TAs:
+                out += "<p>TA - " + str(TA.tausername) + ", courseID: - " + str(TA.courseID) + ", LabID: - " + str(TA.LabID) + "</p>"
+            return out
+        return "Could Not Display TA Assignments"
