@@ -180,3 +180,4 @@ class CreateAccount(View):
         out = com.command(["CreateAccount", username, password, clearance])
 
         return render(request, "CreateAccount.html", {'out': out})
+
