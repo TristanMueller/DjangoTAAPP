@@ -82,7 +82,7 @@ class Home(View):
 
     def Admin(self):
         return "<a href=""#"">Create Courses</a><br> \
-        <a href=""#"">Create Accounts</a><br> \
+        <a href=""/Home/CreateAccount"">Create Accounts</a><br> \
         <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
         <a href=""#"">Delete Accounts</a><br> \
         <a href=""/Home/EditAccount/"">Edit Accounts</a><br> \
@@ -90,14 +90,13 @@ class Home(View):
 
     def Supervisor(self):
         return "<a href=""#"">Create Courses</a><br> \
-        <a href=""#"">Create Accounts</a><br> \
+        <a href=""/Home/CreateAccount"">Create Accounts</a><br> \
         <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
         <a href=""#"">Delete Accounts</a><br> \
         <a href=""/Home/EditAccount/"">Edit Accounts</a><br> \
         <a href=""#"">Access all data</a><br> \
         <a href=""#"">Assign Professors To Courses</a><br> \
-        <a href=""#"">Assign TAs to Labs</a>"
-
+        <a href=""#"">Assign TAs to Labs</a>" \
 
 class EditAccount(View):
 
@@ -163,3 +162,21 @@ class DisplayPublicAccounts(View):
     def post(self, request):
         out = com.command(["DisplayPublicAccounts"])
         return render(request, "DisplayPublicAccounts.html", {'out': out})
+
+
+class CreateAccount(View):
+
+    def get(self, request):
+        return render(request, "CreateAccount.html", {'out': ""})
+
+    def post(self, request):
+
+        username = request.POST["username"]
+
+        password = request.POST["password"]
+
+        clearance = request.POST["clearance"]
+
+        out = com.command(["CreateAccount", username, password, clearance])
+
+        return render(request, "CreateAccount.html", {'out': out})

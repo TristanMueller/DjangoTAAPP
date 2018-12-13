@@ -22,11 +22,13 @@ from DjangoTAApp.views import Login
 from DjangoTAApp.views import EditAccount
 from DjangoTAApp.views import DisplayPublicAccounts
 from DjangoTAApp.views import EditContact
+from DjangoTAApp.views import CreateAccount
 
 urlpatterns = [
     path('', Login.as_view()),
     path('Home/', Home.as_view()),
     path('Home/EditAccount/', EditAccount.as_view()),
     path('Home/DisplayPublicAccounts/', DisplayPublicAccounts.as_view()),
-    path('Home/EditContact/', EditContact.as_view())
+    path('Home/EditContact/', EditContact.as_view()),
+    path('Home/CreateAccount/', CreateAccount.as_view())
 ]
