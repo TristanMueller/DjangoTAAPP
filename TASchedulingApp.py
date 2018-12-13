@@ -165,10 +165,11 @@ class TASchedulingApp:
 #brandon's stuff
     def createContact(self, sName, sNumber, sEmail):
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
+            users = list(User.objects.filter(username=sName))
             contacts = list(Contacts.objects.filter(instructor=sName))
             if len(contacts) > 0:
                 return False
-            else:
+            elif len(users) == 1:
                 contact = Contacts(instructor=sName, phone=sNumber, email=sEmail)
                 contact.save()
                 return True
@@ -176,7 +177,7 @@ class TASchedulingApp:
             return False
 
     def editContact(self, sName, sNewName, sNewNumber, sNewEmail):
-        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
+        if self.LoggedInUser is not None:
             contacts = list(Contacts.objects.filter(instructor=sName))
             if len(contacts) == 1:
                 Contacts.objects.filter(instructor=sName).delete()

@@ -102,6 +102,9 @@ class CommandHandler():
     def currentClearance(self):
         return app.LoggedInUser.clearance
 
+    def currentUser(self):
+        return app.LoggedInUser.username
+
 
 def commandlist():
     out = "<h1>Commands</h1>"

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>TASchedulingApp</title>
+</head>
+<body>
+    {% for contact in contacts %}
+        <div>
+            <form method="post" action="/Home/EditContact/">
+                {% csrf_token %}
+                {{ contact.instructor }} <input type="hidden" name="username" value ={{ contact.instructor }}><input type="text" name="email"value={{ contact.email }}><input type="text" name="phone"value={{ contact.phone }}><input type="submit"/>
+            </form>
+        </div>
+    {% endfor %}
+    <button><a href="/Home">Back To Home</a></button>
+    <div id="out">{{out | safe }}</div>
+
+</body>
+</html>
