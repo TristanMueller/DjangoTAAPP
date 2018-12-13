@@ -91,10 +91,17 @@ class CommandHandler():
         elif args[0] == "DisplayTAAssignments":
             return app.displayTAAssignments()
 
+        elif args[0] == "DisplayPublicAccounts":
+            return app.displayPublicAccounts()
+
         elif args[0] == "Help":
             return commandlist()
         else:
             return "Error"
+
+    def currentClearance(self):
+        return app.LoggedInUser.clearance
+
 
 def commandlist():
     out = "<h1>Commands</h1>"

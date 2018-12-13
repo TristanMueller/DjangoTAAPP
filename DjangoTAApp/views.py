@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 
 from django.http import HttpResponseRedirect
 
-from DjangoTAApp.models import  User
+from DjangoTAApp.models import User
 
 
 
@@ -53,12 +53,18 @@ class Home(View):
 
 
     def get(self, request):
-
-        return render(request, "Main.html", {'out': ""})
+        links = ""
+        if com.currentClearance() == 4:
+            links = self.TA()
+        return render(request, "Main.html", {'out': '', 'links': links})
 
 
 
     def post(self, request):
+
+        links = ""
+        if com.currentClearance() == 4:
+            links = self.TA()
 
         post = request.POST["command"]
 
@@ -66,11 +72,21 @@ class Home(View):
 
             return HttpResponseRedirect("EditAccount/")
 
-
-
         out = com.command(post.split())
 
-        return render(request, "Main.html", {'out': out})
+        return render(request, "Main.html", {'out': out, 'links': links})
+
+    def TA(self):
+        return "<a href=""#"">Edit your contact info</a><br> \
+        <a href=""#"">View TA assignments</a><br> \
+        <a href=""#"">Contact Book</a>"
+
+    #def Professor(self):
+
+    #def Admin(self):
+
+    #def Supervisor(self):
+
 
 
 

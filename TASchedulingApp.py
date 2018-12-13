@@ -172,6 +172,8 @@ class TASchedulingApp:
                 contact = Contacts(instructor=sName, phone=sNumber, email=sEmail)
                 contact.save()
                 return True
+        else:
+            return False
 
     def editContact(self, sName, sNewName, sNewNumber, sNewEmail):
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
@@ -202,3 +204,22 @@ class TASchedulingApp:
                 out += "<p>TA - " + str(TA.tausername) + ", courseID: - " + str(TA.courseID) + ", LabID: - " + str(TA.LabID) + "</p>"
             return out
         return "Could Not Display TA Assignments"
+
+    def displayPublicAccounts(self):
+        out = ""
+        if self.LoggedInUser is not None:
+            users = list(User.objects.all())
+            for user in users:
+                contact = Contacts.objects.filter(instructor=user.username)
+                if len(contact) == 1:
+                    contact = list(contact)[0]
+                else:
+                    contact = None
+
+                if contact is not None:
+                    out += "<p>(" + user.username + ", " + contact.email + ", " + contact.phone + ")</p>"
+                else:
+                    out += "<p>(" + user.username + ")</p>"
+
+            return out
+        return "Could Not Display Accounts"

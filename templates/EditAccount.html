@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <title>TASchedulingApp</title>
 </head>
 <body>
+    <ul class="accordion" data-accordion>
         {% for user in users %}
-            <div>
+            <li class="accordion-item" data-accordion-item>
+             <a href="#" class="accordion-title">{{ user.username }}</a>
+            <div class="accordion-content" data-tab-content>
                 <form method="post" action="/Home/EditAccount/">
                     {% csrf_token %}
                     <input type="hidden" name="oldusername" value={{ user.username }}><input type="text" name="username"value={{ user.username }}><input type="text" name="password"value={{ user.password }}><input type="text" name="clearance"value={{ user.clearance }}><input type="submit"/>
                 </form>
             </div>
+             </li>
         {% endfor %}
     </ul>
-        <button><a href="/Home">Back To Home</a></button>
+    <button><a href="/Home">Back To Home</a></button>
     <div id="out">{{out | safe }}</div>
 
 </body>
