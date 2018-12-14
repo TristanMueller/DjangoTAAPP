@@ -88,7 +88,9 @@ class Home(View):
         <a href=""/Home/EditCourse"">Edit Courses</a><br> \
         <a href=""/Home/CreateAccount"">Create Accounts</a><br> \
         <a href=""/Home/CreateLab"">Create Labs</a><br> \
-        <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
+        <a href=""/Home/DisplayAccounts/"">Display Accounts</a><br> \
+        <a href=""/Home/DisplayCourses/"">Display Courses</a><br> \
+        <a href=""/Home/DisplayLabs/"">Display Labs</a><br> \
         <a href=""#"">Delete Accounts</a><br> \
         <a href=""/Home/EditAccount/"">Edit Accounts</a><br> \
         <a href=""#"">Access all data</a>"
@@ -98,7 +100,9 @@ class Home(View):
         <a href=""/Home/EditCourse"">Edit Courses</a><br> \
         <a href=""/Home/CreateAccount"">Create Accounts</a><br> \
         <a href=""/Home/CreateLab"">Create Labs</a><br> \
-        <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
+        <a href=""/Home/DisplayAccounts/"">Display Accounts</a><br> \
+        <a href=""/Home/DisplayCourses/"">Display Courses</a><br> \
+        <a href=""/Home/DisplayLabs/"">Display Labs</a><br> \
         <a href=""#"">Delete Accounts</a><br> \
         <a href=""/Home/EditAccount/"">Edit Accounts</a><br> \
         <a href=""#"">Access all data</a><br> \
@@ -160,15 +164,35 @@ class EditContact(View):
         return render(request, "EditContacts.html", {'contacts': contacts, 'out': out})
 
 
-class DisplayPublicAccounts(View):
+class DisplayAccounts(View):
 
     def get(self, request):
-        out = com.command(["DisplayPublicAccounts"])
-        return render(request, "DisplayPublicAccounts.html", {'out': out})
+        out = com.command(["DisplayAccounts"])
+        return render(request, "DisplayAccounts.html", {'out': out})
 
     def post(self, request):
-        out = com.command(["DisplayPublicAccounts"])
-        return render(request, "DisplayPublicAccounts.html", {'out': out})
+        out = com.command(["DisplayAccounts"])
+        return render(request, "DisplayAccounts.html", {'out': out})
+
+class DisplayCourses(View):
+
+    def get(self, request):
+        out = com.command(["DisplayCourses"])
+        return render(request, "DisplayCourses.html", {'out': out})
+
+    def post(self, request):
+        out = com.command(["DisplayCourses"])
+        return render(request, "DisplayCourses.html", {'out': out})
+
+class DisplayLabs(View):
+
+    def get(self, request):
+        out = com.command(["DisplayLabs"])
+        return render(request, "DisplayLabs.html", {'out': out})
+
+    def post(self, request):
+        out = com.command(["DisplayLabs"])
+        return render(request, "DisplayLabs.html", {'out': out})
 
 
 class CreateAccount(View):
@@ -247,4 +271,3 @@ class CreateLab(View):
         out = com.command(["CreateLab", labid, courseid, labta])
 
         return render(request, "CreateLab.html", {'out': out})
-
