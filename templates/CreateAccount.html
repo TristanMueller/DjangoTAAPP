@@ -8,7 +8,7 @@
     <div>
         <form method="post" action="/Home/CreateAccount/">
             {% csrf_token %}
-            <input type="text" name="username"value={{ "" }}><input type="text" name="password"value={{ "" }}><input type="text" name="clearance"value={{ "" }}><input type="submit"/>
+            <input type="text" name="username"value={{ "" }}><input type="text" name="password"value={{ "" }}><input type="number" name="clearance"value={{ "" }}><input type="submit"/>
         </form>
     </div>
     <button><a href="/Home">Back To Home</a></button>
