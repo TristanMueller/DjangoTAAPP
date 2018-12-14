@@ -10,6 +10,8 @@ from django.http import HttpResponseRedirect
 
 from DjangoTAApp.models import User
 
+from DjangoTAApp.models import Courses
+
 from DjangoTAApp.models import  Contacts
 
 
@@ -81,7 +83,8 @@ class Home(View):
         <a href=""#"">Assign TAs</a>"
 
     def Admin(self):
-        return "<a href=""#"">Create Courses</a><br> \
+        return "<a href=""/Home/CreateCourse"">Create Courses</a><br> \
+        <a href=""/Home/EditCourse"">Edit Courses</a><br> \
         <a href=""/Home/CreateAccount"">Create Accounts</a><br> \
         <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
         <a href=""#"">Delete Accounts</a><br> \
@@ -89,14 +92,15 @@ class Home(View):
         <a href=""#"">Access all data</a>"
 
     def Supervisor(self):
-        return "<a href=""#"">Create Courses</a><br> \
+        return "<a href=""/Home/CreateCourse"">Create Courses</a><br> \
+        <a href=""/Home/EditCourse"">Edit Courses</a><br> \
         <a href=""/Home/CreateAccount"">Create Accounts</a><br> \
         <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
         <a href=""#"">Delete Accounts</a><br> \
         <a href=""/Home/EditAccount/"">Edit Accounts</a><br> \
         <a href=""#"">Access all data</a><br> \
         <a href=""#"">Assign Professors To Courses</a><br> \
-        <a href=""#"">Assign TAs to Labs</a>" \
+        <a href=""#"">Assign TAs to Labs</a>"
 
 class EditAccount(View):
 
@@ -181,3 +185,44 @@ class CreateAccount(View):
 
         return render(request, "CreateAccount.html", {'out': out})
 
+class CreateCourse(View):
+
+    def get(self, request):
+        return render(request, "CreateCourse.html", {'out': ""})
+
+    def post(self, request):
+
+        courseid = request.POST["courseid"]
+
+        coursename = request.POST["coursename"]
+
+        courseprof = request.POST["courseprof"]
+
+        out = com.command(["CreateCourse", courseid, coursename, courseprof])
+
+        return render(request, "CreateCourse.html", {'out': out})
+
+
+class EditCourse(View):
+
+    def get(self, request):
+
+        courses = list(Courses.objects.all())
+
+        return render(request, "EditCourse.html", {'courses': courses, 'out': ""})
+
+    def post(self, request):
+
+        oldid = request.POST["oldid"]
+
+        newid = request.POST["newid"]
+
+        coursename = request.POST["coursename"]
+
+        professor = request.POST["professor"]
+
+        out = com.command(["EditCourse", oldid, newid, coursename, professor])
+
+        courses = list(Courses.objects.all())
+
+        return render(request, "EditCourse.html", {'courses': courses, 'out': out})

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>TASchedulingApp</title>
+</head>
+<body>
+    {% for course in courses %}
+        <div>
+            <form method="post" action="/Home/EditCourse/">
+                {% csrf_token %}
+                <input type="hidden" name="oldid" value={{ course.courseID }}><input type="text" name="newid"value={{ course.courseID }}><input type="text" name="coursename"value={{ course.coursename }}><input type="text" name="professor"value={{ course.professor }}><input type="submit"/>
+            </form>
+        </div>
+    {% endfor %}
+    <button><a href="/Home">Back To Home</a></button>
+    <div id="out">{{out | safe }}</div>
+
+</body>
+</html>

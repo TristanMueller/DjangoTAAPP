@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TASchedulingApp</title>
+</head>
+<body>
+    <div>
+        <form method="post" action="/Home/CreateCourse/">
+            {% csrf_token %}
+            <input type="text" name="courseid"value={{ "" }}><input type="text" name="coursename"value={{ "" }}><input type="text" name="courseprof"value={{ "" }}><input type="submit"/>
+        </form>
+    </div>
+    <button><a href="/Home">Back To Home</a></button>
+    <div id="out">{{out | safe }}</div>
+</body>
+</html>

@@ -50,7 +50,7 @@ class TASchedulingApp:
             return False
 
     def createCourse(self, uniqId, coursename, professor):
-        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 2:
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
             courses = list(Courses.objects.filter(courseID=uniqId))
             if len(courses) > 0:
                 return False
