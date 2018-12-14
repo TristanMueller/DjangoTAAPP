@@ -77,6 +77,7 @@ class Home(View):
 
     def Professor(self):
         return "<a href=""/Home/EditContact/"">Edit your contact info</a><br> \
+        <a href=""/Home/CreateLab"">Create Labs</a><br> \
         <a href=""#"">View TA assignments</a><br> \
         <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
         <a href=""#"">View Course Assignments</a><br> \
@@ -86,6 +87,7 @@ class Home(View):
         return "<a href=""/Home/CreateCourse"">Create Courses</a><br> \
         <a href=""/Home/EditCourse"">Edit Courses</a><br> \
         <a href=""/Home/CreateAccount"">Create Accounts</a><br> \
+        <a href=""/Home/CreateLab"">Create Labs</a><br> \
         <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
         <a href=""#"">Delete Accounts</a><br> \
         <a href=""/Home/EditAccount/"">Edit Accounts</a><br> \
@@ -95,6 +97,7 @@ class Home(View):
         return "<a href=""/Home/CreateCourse"">Create Courses</a><br> \
         <a href=""/Home/EditCourse"">Edit Courses</a><br> \
         <a href=""/Home/CreateAccount"">Create Accounts</a><br> \
+        <a href=""/Home/CreateLab"">Create Labs</a><br> \
         <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
         <a href=""#"">Delete Accounts</a><br> \
         <a href=""/Home/EditAccount/"">Edit Accounts</a><br> \
@@ -226,3 +229,22 @@ class EditCourse(View):
         courses = list(Courses.objects.all())
 
         return render(request, "EditCourse.html", {'courses': courses, 'out': out})
+
+
+class CreateLab(View):
+
+    def get(self, request):
+        return render(request, "CreateLab.html", {'out': ""})
+
+    def post(self, request):
+
+        labid = request.POST["labid"]
+
+        courseid = request.POST["courseid"]
+
+        labta = request.POST["labta"]
+
+        out = com.command(["CreateLab", labid, courseid, labta])
+
+        return render(request, "CreateLab.html", {'out': out})
+

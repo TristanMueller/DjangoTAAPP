@@ -65,7 +65,8 @@ class TASchedulingApp:
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 4:
             labs = list(Labs.objects.filter(LabID=iLabID))
             courses = list(Courses.objects.filter(courseID=iCourseId))
-            if len(labs) == 0 and len(courses) > 0:
+            ta = list(User.objects.filter(username=sTA, clearance=4))
+            if len(labs) == 0 and len(courses) > 0 and len(ta) > 0:
                 lab = Labs(LabID=iLabID, courseID=iCourseId, tausername=sTA)
                 lab.save()
                 return True
