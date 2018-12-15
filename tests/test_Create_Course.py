@@ -8,6 +8,7 @@ class Testcode(TestCase):
 
     def test_create_course_successful(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.App.createAccount("rock", "rock", 3)
         self.assertTrue(self.App.createCourse("234", "Example", "rock"))
 
     def test_create_course_unsuccessful_badClearance(self):
@@ -22,7 +23,7 @@ class Testcode(TestCase):
         self.assertFalse(self.App.createCourse("234", "Example", "rock"))
     def test_create_course_invalid_Professor(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
-        self.assertFalse(self.App.createCourse( "234","Example", "Trevor"))
+        self.assertFalse(self.App.createCourse("234", "Example", "Trevor"))
     def test_create_course_invalid_coursename(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
         self.assertFalse(self.App.createCourse("234", "!^^*&^%", "rock"))

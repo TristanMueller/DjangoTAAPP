@@ -27,7 +27,7 @@ class TASchedulingApp:
 
     def createAccount(self,sUsername,sPassword,iClearance):
 
-        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3 and ',' not in sUsername and ',' not in sPassword and isinstance(iClearance, int):
             users = list(User.objects.filter(username=sUsername))
             if len(users) > 0:
                 return False
@@ -54,12 +54,13 @@ class TASchedulingApp:
     def createCourse(self, uniqId, coursename, professor):
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
             courses = list(Courses.objects.filter(courseID=uniqId))
-            if len(courses) > 0:
-                return False
-            else:
+            professors = list(User.objects.filter(username=professor))
+            if len(courses) == 0 and len(professors) == 1:
                 course = Courses(courseID=uniqId, coursename=coursename, professor=professor)
                 course.save()
                 return True
+            else:
+                return False
         else:
             return False
 
@@ -241,5 +242,6 @@ class TASchedulingApp:
                     out += "<p>(" + user.username + ")</p>"
 
             return out
-        return "Could Not Display Accounts"
+        else:
+            return "Could Not Display Accounts"
 

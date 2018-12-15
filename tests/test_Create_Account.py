@@ -15,10 +15,16 @@ class Testcode(TestCase):
         self.App.createAccount("Existing", "Existing", 1)
         self.assertFalse(self.App.createAccount("Existing", "Existing", 1))
 
-    def test_create_account_bad_input(self):
+    def test_create_account_bad_username(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
         self.assertFalse(self.App.createAccount("co,mma", "normal", 1))
+
+    def test_create_account_bad_password(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
         self.assertFalse(self.App.createAccount("normal", "co,mma", 1))
+
+    def test_create_account_bad_clearance(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
         self.assertFalse(self.App.createAccount("normal", "normal", "bad"))
 
     def test_create_account_bad_clearance(self):

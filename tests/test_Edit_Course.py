@@ -8,6 +8,7 @@ class Testcode(TestCase):
 
     def test_edit_course_successful(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.App.createAccount("rock", "rock", 3)
         self.App.createCourse("234", "Example", "rock")
         self.App.createAccount("Sorenson", "password", 3)
         self.assertTrue(self.App.editCourse("234", "235", "Example2", "Sorenson"))
