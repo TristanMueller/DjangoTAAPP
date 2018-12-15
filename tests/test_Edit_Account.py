@@ -41,3 +41,10 @@ class Testcode(TestCase):
         self.App.LoggedInUser = User("TA", "TA", 4)
         self.assertFalse(self.App.editAccount("Admin", "Admin", "Lol", "37"))
 
+    def test_edit_other_pass_fail(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.assertFalse(self.App.editAccount("Bill", "Bill", "", "1"))  # should be invalid password
+
+    def test_edit_other_clearance_fail(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.assertFalse(self.App.editAccount("Bill", "Bill", "Bill", "8"))  # should be invalid clearance

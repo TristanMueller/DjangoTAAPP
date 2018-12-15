@@ -37,3 +37,16 @@ class Testcode(TestCase):
         self.App.createLab("1", "1000", "Bill")
         self.assertFalse(self.App.createLab("1", "1000", "Bill"))
 
+#technically pass but aren't handled gracefully
+
+    def test_create_lab_empty_TA(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.assertTrue(self.App.createLab("87", "361", ""))
+
+    def test_create_lab_empty_course(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.assertFalse(self.App.createLab("99", "", "TA"))
+
+    def test_create_lab_empty_section(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.assertFalse(self.App.createLab("", "361", "TA"))

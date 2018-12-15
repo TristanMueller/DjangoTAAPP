@@ -49,3 +49,9 @@ class Testcode(TestCase):
         self.App.createCourse("234", "Example", "rock")
         self.App.createCourse("235", "Example2", "rock")
         self.assertFalse(self.App.editCourse("234", "236", "Example2", "Sorenson"))
+
+    def test_edit_course_space(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.App.createCourse("234", "Example", "rock")
+        self.App.createCourse("235", "Example2", "rock")
+        self.assertTrue(self.App.editCourse("234", "234", "CS 265", "Sorenson"))

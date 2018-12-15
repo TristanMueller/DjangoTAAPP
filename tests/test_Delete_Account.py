@@ -25,3 +25,7 @@ class Testcode(TestCase):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
         self.App.createAccount("bob", "bob", 2)
         self.assertFalse(self.App.deleteAccount("$%^&#%^"))
+
+    def test_delete_account_own(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.assertTrue(self.App.deleteAccount("Admin"))
