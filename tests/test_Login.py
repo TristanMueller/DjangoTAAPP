@@ -18,3 +18,13 @@ class Testcode(TestCase):
   def test_login_bad_input(self):
     self.App.LoggedInUser = None
     self.assertFalse(self.App.login(1,None))
+
+#Log out
+
+  def test_logout_succeed(self):
+    self.App.LoggedInUser = User("Admin", "Admin", 1)
+    self.assertTrue(self.App.logout())
+
+  def test_logout_no_user(self):
+    self.App.LoggedInUser = None
+    self.assertFalse(self.App.logout())

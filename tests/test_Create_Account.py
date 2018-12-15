@@ -33,3 +33,7 @@ class Testcode(TestCase):
     def test_create_account_no_logged_in_user(self):
         self.App.LoggedInUser = None
         self.assertFalse(self.App.createAccount("Example", "Example", 3))
+
+    def test_create_account_bad_clearance(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.assertFalse(self.App.createAccount("normal", "normal", -1))
