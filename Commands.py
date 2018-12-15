@@ -21,6 +21,7 @@ class CommandHandler():
                 return "Logged Out"
             else:
                 return "Could Not Logout"
+
         elif args[0] == "CreateAccount":
             if app.createAccount(args[1], args[2], args[3]):
                 return "Created New Account"
