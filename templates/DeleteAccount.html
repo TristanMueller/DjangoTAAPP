@@ -10,7 +10,7 @@
         <div>
             <form method="post" action="/Home/DeleteAccount/">
                 {% csrf_token %}
-                <input type="hidden" name="username" value={{ user.username }}><p>{{ user.username }}{{ user.password }}{{ user.clearance }}</p><input type="submit"/>
+                <input type="hidden" name="username" value={{ user.username }}><p>{{ user.username }}{{ user.password }}{{ user.clearance }}</p><input type="submit" value="delete"/>
             </form>
         </div>
     {% endfor %}

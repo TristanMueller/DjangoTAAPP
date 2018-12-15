@@ -1,19 +1,11 @@
 from django.shortcuts import render
-
 from django.views import View
-
 from Commands import CommandHandler
-
 from django.shortcuts import redirect
-
 from django.http import HttpResponseRedirect
-
 from DjangoTAApp.models import User
-
 from DjangoTAApp.models import Courses
-
 from DjangoTAApp.models import  Contacts
-
 from DjangoTAApp.models import Labs
 
 
