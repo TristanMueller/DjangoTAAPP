@@ -30,6 +30,7 @@ from DjangoTAApp.views import CreateCourse
 from DjangoTAApp.views import EditCourse
 from DjangoTAApp.views import CreateLab
 from DjangoTAApp.views import AssignTAtoLab
+from DjangoTAApp.views import DisplayPublicAccounts
 
 urlpatterns = [
     path('', Login.as_view()),
@@ -44,5 +45,6 @@ urlpatterns = [
     path('Home/CreateCourse/', CreateCourse.as_view()),
     path('Home/EditCourse/', EditCourse.as_view()),
     path('Home/CreateLab/', CreateLab.as_view()),
-    path('Home/AssignTAtoLab/', AssignTAtoLab.as_view())
+    path('Home/AssignTAtoLab/', AssignTAtoLab.as_view()),
+    path('Home/DisplayPublicAccounts/', DisplayPublicAccounts.as_view())
 ]

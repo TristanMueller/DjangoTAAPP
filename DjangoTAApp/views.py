@@ -95,6 +95,7 @@ class Home(View):
         <a href=""/Home/CreateAccount/"">Create Accounts</a><br> \
         <a href=""/Home/CreateLab/"">Create Labs</a><br> \
         <a href=""/Home/AssignTAtoLab/"">Assign TAs to Labs</a><br> \
+        <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
         <a href=""/Home/DisplayAccounts/"">Display Accounts</a><br> \
         <a href=""/Home/DisplayCourses/"">Display Courses</a><br> \
         <a href=""/Home/DisplayLabs/"">Display Labs</a><br> \
@@ -107,6 +108,7 @@ class Home(View):
         <a href=""/Home/EditCourse/"">Edit Courses</a><br> \
         <a href=""/Home/CreateAccount/"">Create Accounts</a><br> \
         <a href=""/Home/CreateLab/"">Create Labs</a><br> \
+        <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
         <a href=""/Home/DisplayAccounts/"">Display Accounts</a><br> \
         <a href=""/Home/DisplayCourses/"">Display Courses</a><br> \
         <a href=""/Home/DisplayLabs/"">Display Labs</a><br> \
@@ -312,3 +314,13 @@ class AssignTAtoLab(View):
 
         return render(request, "AssignTAtoLab.html", {'labs': labs, 'out': out})
 
+
+class DisplayPublicAccounts(View):
+
+    def get(self, request):
+        out = com.command(["DisplayPublicAccounts"])
+        return render(request, "DisplayPublicAccounts.html", {'out': out})
+
+    def post(self, request):
+        out = com.command(["DisplayPublicAccounts"])
+        return render(request, "DisplayPublicAccounts.html", {'out': out})
