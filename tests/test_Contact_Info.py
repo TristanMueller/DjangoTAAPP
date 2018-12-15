@@ -2,7 +2,8 @@ from django.test import TestCase
 from TASchedulingApp import TASchedulingApp
 from User import User
 
-
+#Tests for several PBIs
+#PBI ID: 2494994, 2495035
 class Testcode(TestCase):
     App = TASchedulingApp()
 
