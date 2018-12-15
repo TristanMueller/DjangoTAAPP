@@ -2,7 +2,8 @@ from django.test import TestCase
 from TASchedulingApp import TASchedulingApp
 from User import User
 
-
+#PBI ID: 2495002
+#As a supervisor or admin I should be able to create courses so that Instructors and Teaching assistants can take part in these courses.
 class Testcode(TestCase):
     App = TASchedulingApp()
 
