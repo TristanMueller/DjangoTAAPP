@@ -142,6 +142,20 @@ class TASchedulingApp:
             return out
         return "Could Not Display Courses"
 
+    def assignProfToCourse(self, courseid, profname):
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
+            courses = list(Courses.objects.filter(courseID=courseid))
+            prof = list(User.objects.filter(username=profname))
+            if len(courses) == 1 and len(prof) == 1:
+                Courses.objects.filter(courseID=courseid).delete()
+                course = Courses(courseID=courseid, coursename=courses[0].coursename, professor=profname)
+                course.save()
+                return True
+            else:
+                return False
+        else:
+            return False
+
     def displayLabsForTA(self):
         out = ""
         if self.LoggedInUser is not None and self.LoggedInUser.clearance == 4:

@@ -56,7 +56,7 @@ class Testcode(TestCase):
         self.App.createAccount("Assistant", "Assistant", 4)
         self.App.logout()
         self.App.login("Tristan", "Tristan")
-        self.assertTrue(self.App.assignTAToLab("001", "Assistant"))
+        self.assertFalse(self.App.assignTAToLab("001", "Assistant"))
     def test_AssignTAToLab_TA_already_assigned(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
         self.App.createAccount("Tristan", "Tristan", 3)

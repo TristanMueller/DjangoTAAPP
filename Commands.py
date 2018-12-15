@@ -68,6 +68,12 @@ class CommandHandler():
             else:
                 return "Could Not Assign TA To Lab"
 
+        elif args[0] == "AssignProfToCourses":
+            if app.assignProfToCourse(args[1], args[2]):
+                return "Assigned Professor to Course"
+            else:
+                return "Could Not Assign Professor to Course"
+
         elif args[0] == "CreateContact":
             if app.createContact(args[1], args[2], args[3]):
                 return "Created New Contact"

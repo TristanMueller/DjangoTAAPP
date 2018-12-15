@@ -115,7 +115,7 @@ class Home(View):
         <a href=""/Home/DeleteAccount/"">Delete Accounts</a><br> \
         <a href=""/Home/EditAccount/"">Edit Accounts</a><br> \
         <a href=""#"">Access all data</a><br> \
-        <a href=""#"">Assign Professors To Courses</a><br> \
+        <a href=""/Home/AssignProfToCourses/"">Assign Professors To Courses</a><br> \
         <a href=""/Home/AssignTAtoLab/"">Assign TAs to Labs</a>"
 
 class EditAccount(View):
@@ -295,6 +295,24 @@ class DeleteAccount(View):
         users = list(User.objects.all())
 
         return render(request, "DeleteAccount.html", {'users': users, 'out': out})
+
+
+class AssignProfToCourses(View):
+
+    def get(self, request):
+        courses = list(Courses.objects.all())
+        return render(request, "AssignProfToCourses.html", {'courses': courses, 'out': ""})
+
+    def post(self, request):
+        prof = request.POST["prof"]
+
+        courseid = request.POST["courseid"]
+
+        out = com.command(["AssignProfToCourses", courseid, prof])
+
+        courses = list(Courses.objects.all())
+
+        return render(request, "AssignProfToCourses.html", {'courses': courses, 'out': out})
 
 
 class AssignTAtoLab(View):
