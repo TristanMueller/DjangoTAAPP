@@ -2,7 +2,8 @@ from django.test import TestCase
 from TASchedulingApp import TASchedulingApp
 from User import User
 
-
+#PBI ID: 2495020
+#As Supervisor, I may assign instructors to courses so that they may know which courses they are teaching and when.
 class Testcode(TestCase):
     App = TASchedulingApp()
 
