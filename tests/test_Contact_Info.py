@@ -21,11 +21,22 @@ class Testcode(TestCase):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
         self.App.createAccount("bob", "bob", 3)
         self.assertTrue(self.App.createContact("bob", "2624736485", "sheep@jeep.com"))
+    def test_create_Contact_already_exists(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.App.createAccount("bob", "bob", 3)
+        self.App.createContact("bob", "2624736485", "sheep@jeep.com")
+        self.assertFalse(self.App.createContact("bob", "2624736485", "sheep@jeep.com"))
     def test_edit_Contact_valid(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
         self.App.createAccount("bob", "bob", 3)
         self.App.createContact("bob", "2624736485", "sheep@jeep.com")
         self.assertTrue(self.App.editContact("bob", "tim", "2624736485", "sheep@jeep.com"))
+    def test_edit_Contact_already_edited(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.App.createAccount("bob", "bob", 3)
+        self.App.createContact("bob", "2624736485", "sheep@jeep.com")
+        self.App.editContact("bob", "tim", "2624736485", "sheep@jeep.com")
+        self.assertFalse(self.App.editContact("bob", "tim", "2624736485", "sheep@jeep.com"))
     def test_display_Contacts_sucessful(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
         x = self.App.displayContacts() != "Could Not Display Contacts"

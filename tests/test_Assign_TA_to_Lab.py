@@ -57,3 +57,13 @@ class Testcode(TestCase):
         self.App.logout()
         self.App.login("Tristan", "Tristan")
         self.assertTrue(self.App.assignTAToLab("001", "Assistant"))
+    def test_AssignTAToLab_TA_already_assigned(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.App.createAccount("Tristan", "Tristan", 3)
+        self.App.createCourse("12345", "CS361", "Tristan")
+        self.App.createAccount("Assistant", "Assistant", 4)
+        self.App.createLab("001", "12345", "Assistant")
+        self.App.logout()
+        self.App.login("Tristan", "Tristan")
+        self.assertTrue(self.App.assignTAToLab("001", "Assistant"))
+
