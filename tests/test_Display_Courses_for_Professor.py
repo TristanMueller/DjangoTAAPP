@@ -2,7 +2,8 @@ from django.test import TestCase
 from TASchedulingApp import TASchedulingApp
 from User import User
 
-
+#PBI ID: 2495001
+#As an instructor, I need to be able to view course assignments so that I can determine which TAs need to go where.
 class Testcode(TestCase):
     App = TASchedulingApp()
 
