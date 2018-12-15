@@ -32,3 +32,10 @@ class Testcode(TestCase):
     def test_edit_clearance_fail(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
         self.assertFalse(self.App.editAccount("Admin", "Admin", "Lol", "37"))  # should be invalid clearance
+
+    def test_edit_no_user(self):
+        self.App.LoggedInUser = None
+        self.assertFalse(self.App.editAccount("Admin", "Admin", "Lol", "37"))
+    def test_edit_invalid_user(self):
+        self.App.LoggedInUser = User("TA", "TA", 4)
+        self.assertFalse(self.App.editAccount("Admin", "Admin", "Lol", "37"))
