@@ -17,4 +17,4 @@ class Testcode(TestCase):
 
     def test_delete_account_invalid_clearance(self):
         self.App.LoggedInUser = User("TA", "TA", 4)
-        self.assertEquals(self.App.deleteAccount("jack"), "Could Not Delete Account")
+        self.assertFalse(self.App.deleteAccount("jack"))
