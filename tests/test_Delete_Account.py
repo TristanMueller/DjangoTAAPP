@@ -21,3 +21,7 @@ class Testcode(TestCase):
     def test_delete_account_no_logged_in_user(self):
         self.App.LoggedInUser = None
         self.assertFalse(self.App.deleteAccount("jack"))
+    def test_delete_account_invalid_input(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.App.createAccount("bob", "bob", 2)
+        self.assertTrue(self.App.deleteAccount("$%^&#%^"))

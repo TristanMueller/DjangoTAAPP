@@ -36,3 +36,4 @@ class Testcode(TestCase):
         self.App.createAccount("Bill", "Bill", 4)
         self.App.createLab("1", "1000", "Bill")
         self.assertFalse(self.App.createLab("1", "1000", "Bill"))
+

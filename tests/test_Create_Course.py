@@ -23,3 +23,6 @@ class Testcode(TestCase):
     def test_create_course_invalid_Professor(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
         self.assertFalse(self.App.createCourse( "234","Example", "Trevor"))
+    def test_create_course_invalid_coursename(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.assertFalse(self.App.createCourse("234", "!^^*&^%", "rock"))
