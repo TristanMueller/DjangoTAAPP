@@ -94,6 +94,8 @@ class Home(View):
         <a href=""/Home/EditCourse/"">Edit Courses</a><br> \
         <a href=""/Home/CreateAccount/"">Create Accounts</a><br> \
         <a href=""/Home/CreateLab/"">Create Labs</a><br> \
+        <a href=""/Home/CreateContact/"">Create Contacts</a><br> \
+        <a href=""/Home/EditContact/"">Edit Contacts</a><br> \
         <a href=""/Home/AssignTAtoLab/"">Assign TAs to Labs</a><br> \
         <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
         <a href=""/Home/DisplayAccounts/"">Display Accounts</a><br> \
@@ -108,6 +110,8 @@ class Home(View):
         <a href=""/Home/EditCourse/"">Edit Courses</a><br> \
         <a href=""/Home/CreateAccount/"">Create Accounts</a><br> \
         <a href=""/Home/CreateLab/"">Create Labs</a><br> \
+        <a href=""/Home/CreateContact/"">Create Contacts</a><br> \
+        <a href=""/Home/EditContact/"">Edit Contacts</a><br> \
         <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
         <a href=""/Home/DisplayAccounts/"">Display Accounts</a><br> \
         <a href=""/Home/DisplayCourses/"">Display Courses</a><br> \
@@ -144,6 +148,21 @@ class EditAccount(View):
 
         return render(request, "EditAccount.html", {'users': users, 'out': out})
 
+class CreateContact(View):
+
+    def get(self, request):
+        return render(request, "CreateContact.html", {'out': ""})
+
+    def post(self, request):
+        name = request.POST["name"]
+
+        phone = request.POST["phone"]
+
+        email = request.POST["email"]
+
+        out = com.command(["CreateContact", name, phone, email])
+
+        return render(request, "CreateContact.html", {'out': out})
 
 class EditContact(View):
 

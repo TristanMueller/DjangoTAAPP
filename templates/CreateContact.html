@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TASchedulingApp</title>
+</head>
+<body>
+    <div>
+        <form method="post" action="/Home/CreateContact/">
+            {% csrf_token %}
+            <input type="text" name="name"value={{ "" }}><input type="text" name="phone"value={{ "" }}><input type="text" name="email"value={{ "" }}><input type="submit"/>
+        </form>
+    </div>
+    <button><a href="/Home">Back To Home</a></button>
+    <div id="out">{{out | safe }}</div>
+</body>
+</html>
