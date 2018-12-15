@@ -23,6 +23,7 @@ class Testcode(TestCase):
 
     def test_edit_user_fail(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.App.createAccount("TA1", "TA1", 4)
         self.assertFalse(self.App.editAccount("Admin", "TA1", "Admin", "1"))  # should be user that does exist
 
     def test_edit_pass_fail(self):
@@ -39,3 +40,4 @@ class Testcode(TestCase):
     def test_edit_invalid_user(self):
         self.App.LoggedInUser = User("TA", "TA", 4)
         self.assertFalse(self.App.editAccount("Admin", "Admin", "Lol", "37"))
+

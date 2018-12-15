@@ -41,7 +41,10 @@ class TASchedulingApp:
     def editAccount(self, sUsername, sNewUsername, sPassword, iClearance):
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
             users = list(User.objects.filter(username=sUsername))
-            if len(users) == 1:
+            newuser = list()
+            if sUsername != sNewUsername:
+                newuser = list(User.objects.filter(username=sNewUsername))
+            if len(users) == 1 and len(newuser) == 0:
                 User.objects.filter(username=sUsername).delete()
                 u1 = User(username=sNewUsername, password=sPassword, clearance=iClearance)
                 u1.save()
