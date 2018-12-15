@@ -145,7 +145,7 @@ class TASchedulingApp:
     def assignProfToCourse(self, courseid, profname):
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
             courses = list(Courses.objects.filter(courseID=courseid))
-            prof = list(User.objects.filter(username=profname))
+            prof = list(User.objects.filter(username=profname, clearance=3))
             if len(courses) == 1 and len(prof) == 1:
                 Courses.objects.filter(courseID=courseid).delete()
                 course = Courses(courseID=courseid, coursename=courses[0].coursename, professor=profname)
