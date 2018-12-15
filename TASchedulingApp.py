@@ -27,7 +27,7 @@ class TASchedulingApp:
 
     def createAccount(self,sUsername,sPassword,iClearance):
 
-        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3 and "," not in sUsername and "," not in sPassword and isinstance(iClearance, int):
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
             users = list(User.objects.filter(username=sUsername))
             if len(users) > 0:
                 return False
@@ -35,6 +35,8 @@ class TASchedulingApp:
                 user = User(username=sUsername, password=sPassword, clearance=iClearance)
                 user.save()
                 return True
+        else:
+            return False
 
     def editAccount(self, sUsername, sNewUsername, sPassword, iClearance):
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
@@ -84,7 +86,7 @@ class TASchedulingApp:
                 return True
             else:
                 return False
-        return "Could Not Delete Account"
+        return False
 
     def displayAccounts(self):
         out = ""
@@ -225,3 +227,4 @@ class TASchedulingApp:
 
             return out
         return "Could Not Display Accounts"
+

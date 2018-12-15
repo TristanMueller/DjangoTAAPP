@@ -91,7 +91,7 @@ class Home(View):
         <a href=""/Home/DisplayAccounts/"">Display Accounts</a><br> \
         <a href=""/Home/DisplayCourses/"">Display Courses</a><br> \
         <a href=""/Home/DisplayLabs/"">Display Labs</a><br> \
-        <a href=""#"">Delete Accounts</a><br> \
+        <a href=""/Home/DeleteAccount"">Delete Accounts</a><br> \
         <a href=""/Home/EditAccount/"">Edit Accounts</a><br> \
         <a href=""#"">Access all data</a>"
 
@@ -103,7 +103,7 @@ class Home(View):
         <a href=""/Home/DisplayAccounts/"">Display Accounts</a><br> \
         <a href=""/Home/DisplayCourses/"">Display Courses</a><br> \
         <a href=""/Home/DisplayLabs/"">Display Labs</a><br> \
-        <a href=""#"">Delete Accounts</a><br> \
+        <a href=""/Home/DeleteAccount"">Delete Accounts</a><br> \
         <a href=""/Home/EditAccount/"">Edit Accounts</a><br> \
         <a href=""#"">Access all data</a><br> \
         <a href=""#"">Assign Professors To Courses</a><br> \
@@ -271,3 +271,19 @@ class CreateLab(View):
         out = com.command(["CreateLab", labid, courseid, labta])
 
         return render(request, "CreateLab.html", {'out': out})
+
+class DeleteAccount(View):
+
+    def get(self, request):
+        users = list(User.objects.all())
+        return render(request, "DeleteAccount.html", {'users': users, 'out': ""})
+
+    def post(self, request):
+        user = request.POST["username"]
+
+        out = com.command(["DeleteAccount", user])
+
+        users = list(User.objects.all())
+
+        return render(request, "DeleteAccount.html", {'users': users, 'out': out})
+
