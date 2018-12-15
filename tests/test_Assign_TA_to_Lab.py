@@ -2,7 +2,8 @@ from django.test import TestCase
 from TASchedulingApp import TASchedulingApp
 from User import User
 
-
+#PBI ID: 2495005
+#As a Supervisor I want to assign TA's to particular lab sections so that I can tell the TA's of different sections.
 class Testcode(TestCase):
     App = TASchedulingApp()
 
