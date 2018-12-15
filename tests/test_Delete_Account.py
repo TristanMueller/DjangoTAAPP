@@ -28,4 +28,4 @@ class Testcode(TestCase):
 
     def test_delete_account_own(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
-        self.assertTrue(self.App.deleteAccount("Admin"))
+        self.assertTrue(self.App.deleteAccount("Admin")) #this is bad

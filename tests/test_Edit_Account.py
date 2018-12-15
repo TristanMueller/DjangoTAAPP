@@ -48,3 +48,7 @@ class Testcode(TestCase):
     def test_edit_other_clearance_fail(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
         self.assertFalse(self.App.editAccount("Bill", "Bill", "Bill", "8"))  # should be invalid clearance
+
+    def test_edit_delete_account(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.assertTrue(self.App.editAccount("Bill", "", "", ""))  # should this work?
