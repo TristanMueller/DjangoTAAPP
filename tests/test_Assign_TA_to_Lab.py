@@ -11,9 +11,9 @@ class Testcode(TestCase):
         self.App.createAccount("Tristan", "Tristan", 3)
         self.App.createCourse("12345", "CS361", "Tristan")
         self.App.createAccount("Assistant", "Assistant", 4)
+        self.App.createLab("001", "12345", "")
         self.App.logout()
         self.App.login("Tristan", "Tristan")
-        self.App.createLab("001", "12345", "")
         self.assertTrue(self.App.assignTAToLab("001", "Assistant"))
 
     def test_AssignTAToLab_NotAProfessor(self):
@@ -46,3 +46,14 @@ class Testcode(TestCase):
         self.App.login("Tristan", "Tristan")
         self.App.createLab("001", "12345", "")
         self.assertFalse(self.App.assignTAToLab("001", "Assistant"))
+    def test_AssignTAToLab_no_logged_in_user(self):
+        self.App.LoggedInUser = None
+        self.assertFalse(self.App.assignTAToLab("001", "Assistant"))
+    def test_AssignTAToLab_Lab_Does_not_exist(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.App.createAccount("Tristan", "Tristan", 3)
+        self.App.createCourse("12345", "CS361", "Tristan")
+        self.App.createAccount("Assistant", "Assistant", 4)
+        self.App.logout()
+        self.App.login("Tristan", "Tristan")
+        self.assertTrue(self.App.assignTAToLab("001", "Assistant"))
