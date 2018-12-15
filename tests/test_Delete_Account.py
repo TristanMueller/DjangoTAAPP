@@ -2,7 +2,8 @@ from django.test import TestCase
 from TASchedulingApp import TASchedulingApp
 from User import User
 
-
+#PBI ID: 2495023
+#As a supervisor or Admin I need to be able to delete accounts for users that no longer need access to the TA scheduling app.
 class Testcode(TestCase):
     App = TASchedulingApp()
 
