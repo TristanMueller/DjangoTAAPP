@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>TASchedulingApp</title>
+</head>
+<body>
+    {% for lab in labs %}
+        <div>
+            <form method="post" action="/Home/AssignTAtoLab/">
+                {% csrf_token %}
+                <input type="hidden" name="labid" value={{ lab.LabID }}><p>{{ lab.LabID }},{{ lab.courseID }}</p><input type="text" name="taname"value={{ "" }}><input type="submit"/>
+            </form>
+        </div>
+    {% endfor %}
+    <button><a href="/Home">Back To Home</a></button>
+    <div id="out">{{out | safe }}</div>
+
+</body>
+</html>

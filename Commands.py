@@ -63,7 +63,7 @@ class CommandHandler():
                 return "Could Not Edit Course"
 
         elif args[0] == "AssignTAToLab":
-            if app.AssignTAToLab(args[1], args[2]):
+            if app.assignTAToLab(args[1], args[2]):
                 return "Assigned TA To Lab"
             else:
                 return "Could Not Assign TA To Lab"

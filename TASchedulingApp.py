@@ -152,12 +152,12 @@ class TASchedulingApp:
         return "Could Not Display Labs"
 
     def assignTAToLab(self, labid, tausername):
-        if self.LoggedInUser is not None and self.LoggedInUser.clearance == 3:
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 4:
             labs = list(Labs.objects.filter(LabID=labid))
             ta = list(User.objects.filter(username=tausername))
             if len(labs) == 1 and len(ta) == 1:
                 Labs.objects.filter(LabID=labid).delete()
-                lab = Labs(labid, labs[0].courseID, tausername)
+                lab = Labs(LabID=labid, courseID=labs[0].courseID, tausername=tausername)
                 lab.save()
                 return True
             else:

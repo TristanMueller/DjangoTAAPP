@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
             name='Labs',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('LabID', models.IntegerField(default=0)),
+                ('LabID', models.CharField(max_length=20)),
                 ('courseID', models.CharField(max_length=20)),
                 ('tausername', models.CharField(max_length=20)),
             ],
