@@ -66,6 +66,10 @@ class Home(View):
             links = self.TA()
 
         post = request.POST["command"]
+        if post == "Logout":
+            com.command(post)
+            return redirect("/")
+
         out = com.command(post.split())
 
         return render(request, "Main.html", {'out': out, 'links': links})
