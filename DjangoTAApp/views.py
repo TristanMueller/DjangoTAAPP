@@ -67,7 +67,7 @@ class Home(View):
 
         post = request.POST["command"]
         if post == "Logout":
-            com.command(post)
+            com.command([post])
             return redirect("/")
 
         out = com.command(post.split())
