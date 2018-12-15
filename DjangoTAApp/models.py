@@ -6,7 +6,7 @@ class User(models.Model):
     clearance = models.IntegerField(default=0)
 
 class Courses(models.Model):
-    courseID = models.IntegerField(default=0)
+    courseID = models.CharField(max_length=20)
     coursename = models.CharField(max_length=20)
     professor = models.CharField(max_length=20)
 

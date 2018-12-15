@@ -27,7 +27,7 @@ class TASchedulingApp:
 
     def createAccount(self,sUsername,sPassword,iClearance):
 
-        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3 and ',' not in sUsername and ',' not in sPassword and isinstance(iClearance, int):
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3 and ',' not in sUsername and ',' not in sPassword:
             users = list(User.objects.filter(username=sUsername))
             if len(users) > 0:
                 return False
@@ -92,6 +92,26 @@ class TASchedulingApp:
                 return False
         return False
 
+    def deleteCourse(self, courseID):
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
+            if len(list(Courses.objects.filter(courseID=courseID))) > 0:
+                Courses.objects.filter(courseID=courseID).delete()
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def deleteLab(self, LabID):
+        if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
+            if len(list(Labs.objects.filter(LabID=LabID))) > 0:
+                Labs.objects.filter(LabID=LabID).delete()
+                return True
+            else:
+                return False
+        else:
+            return False
+
     def displayAccounts(self):
         out = ""
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
@@ -122,10 +142,12 @@ class TASchedulingApp:
     def editCourse(self, uniqId, newUniqId, coursename, professor):
         if self.LoggedInUser is not None and self.LoggedInUser.clearance < 3:
             coursesId = list(Courses.objects.filter(courseID=uniqId))
-            coursesNid = list(Courses.objects.filter(courseID=newUniqId))
-            coursesName = list(Courses.objects.filter(coursename=coursename))
+            coursesNid = list()
+            if uniqId != newUniqId:
+                coursesNid = list(Courses.objects.filter(courseID=newUniqId))
+            #coursesName = list(Courses.objects.filter(coursename=coursename))
             professors = list(User.objects.filter(username=professor))
-            if len(coursesId) == 1 and len(coursesNid) == 0 and len(coursesName) == 0 and len(professors) == 1:
+            if len(coursesId) == 1 and len(coursesNid) == 0 and len(professors) == 1:
                 Courses.objects.filter(courseID=uniqId).delete()
                 course = Courses(courseID=newUniqId, coursename=coursename, professor=professor)
                 course.save()

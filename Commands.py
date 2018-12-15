@@ -47,6 +47,19 @@ class CommandHandler():
                 return "Deleted Account"
             else:
                 return "Could Not Delete Account"
+
+        elif args[0] == "DeleteCourse":
+            if app.deleteCourse(args[1]):
+                return "Deleted Course"
+            else:
+                return "Could Not Delete Course"
+
+        elif args[0] == "DeleteLab":
+            if app.deleteLab(args[1]):
+                return "Deleted Lab"
+            else:
+                return "Could Not Delete Lab"
+
         elif args[0] == "DisplayAccounts":
             return app.displayAccounts()
 
@@ -57,7 +70,7 @@ class CommandHandler():
             return app.displayLabs()
 
         elif args[0] == "EditCourse":
-            if app.editCourse(args[1], args[2], args[3],args[4]):
+            if app.editCourse(args[1], args[2], args[3], args[4]):
                 return "Edited Course"
             else:
                 return "Could Not Edit Course"
