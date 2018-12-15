@@ -200,6 +200,7 @@ class TASchedulingApp:
                 out += "<p>Contacts: ID - " + str(contact.instructor) + ", Phone - " + contact.phone + ", Email - " + contact.email + "</p>"
             return out
         return "Could Not Display Contacts"
+
     def displayTAAssignments(self):
         out = ""
         if self.LoggedInUser is not None and self.LoggedInUser.clearance == 4:
