@@ -37,3 +37,11 @@ class Testcode(TestCase):
     def test_create_account_bad_clearance(self):
         self.App.LoggedInUser = User("Admin", "Admin", 1)
         self.assertFalse(self.App.createAccount("normal", "normal", -1))
+
+    def test_create_account_high_clearance(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.assertFalse(self.App.createAccount("normal", "normal", 8))
+
+    def test_create_account_no_pass(self):
+        self.App.LoggedInUser = User("Admin", "Admin", 1)
+        self.assertFalse(self.App.createAccount("normal", "", 3))
