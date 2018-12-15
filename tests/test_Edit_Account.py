@@ -2,7 +2,8 @@ from django.test import TestCase
 from TASchedulingApp import TASchedulingApp
 from User import User
 
-
+# PBI ID: 2495025
+# As a supervisor or admin I should be able to edit accounts in order to keep information current for the TA scheduling app.
 class Testcode(TestCase):
     App = TASchedulingApp()
 
