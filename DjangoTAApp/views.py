@@ -14,6 +14,8 @@ from DjangoTAApp.models import Courses
 
 from DjangoTAApp.models import  Contacts
 
+from DjangoTAApp.models import Labs
+
 
 
 # Create your views here.
@@ -81,37 +83,38 @@ class Home(View):
 
     def Professor(self):
         return "<a href=""/Home/EditContact/"">Edit your contact info</a><br> \
-        <a href=""/Home/CreateLab"">Create Labs</a><br> \
+        <a href=""/Home/CreateLab/"">Create Labs</a><br> \
         <a href=""#"">View TA assignments</a><br> \
         <a href=""/Home/DisplayPublicAccounts/"">Contact Book</a><br> \
         <a href=""#"">View Course Assignments</a><br> \
-        <a href=""#"">Assign TAs</a>"
+        <a href=""/Home/AssignTAtoLab/"">Assign TAs to Labs</a>"
 
     def Admin(self):
-        return "<a href=""/Home/CreateCourse"">Create Courses</a><br> \
-        <a href=""/Home/EditCourse"">Edit Courses</a><br> \
-        <a href=""/Home/CreateAccount"">Create Accounts</a><br> \
-        <a href=""/Home/CreateLab"">Create Labs</a><br> \
+        return "<a href=""/Home/CreateCourse/"">Create Courses</a><br> \
+        <a href=""/Home/EditCourse/"">Edit Courses</a><br> \
+        <a href=""/Home/CreateAccount/"">Create Accounts</a><br> \
+        <a href=""/Home/CreateLab/"">Create Labs</a><br> \
+        <a href=""/Home/AssignTAtoLab/"">Assign TAs to Labs</a><br> \
         <a href=""/Home/DisplayAccounts/"">Display Accounts</a><br> \
         <a href=""/Home/DisplayCourses/"">Display Courses</a><br> \
         <a href=""/Home/DisplayLabs/"">Display Labs</a><br> \
-        <a href=""/Home/DeleteAccount"">Delete Accounts</a><br> \
+        <a href=""/Home/DeleteAccount/"">Delete Accounts</a><br> \
         <a href=""/Home/EditAccount/"">Edit Accounts</a><br> \
         <a href=""#"">Access all data</a>"
 
     def Supervisor(self):
-        return "<a href=""/Home/CreateCourse"">Create Courses</a><br> \
-        <a href=""/Home/EditCourse"">Edit Courses</a><br> \
-        <a href=""/Home/CreateAccount"">Create Accounts</a><br> \
-        <a href=""/Home/CreateLab"">Create Labs</a><br> \
+        return "<a href=""/Home/CreateCourse/"">Create Courses</a><br> \
+        <a href=""/Home/EditCourse/"">Edit Courses</a><br> \
+        <a href=""/Home/CreateAccount/"">Create Accounts</a><br> \
+        <a href=""/Home/CreateLab/"">Create Labs</a><br> \
         <a href=""/Home/DisplayAccounts/"">Display Accounts</a><br> \
         <a href=""/Home/DisplayCourses/"">Display Courses</a><br> \
         <a href=""/Home/DisplayLabs/"">Display Labs</a><br> \
-        <a href=""/Home/DeleteAccount"">Delete Accounts</a><br> \
+        <a href=""/Home/DeleteAccount/"">Delete Accounts</a><br> \
         <a href=""/Home/EditAccount/"">Edit Accounts</a><br> \
         <a href=""#"">Access all data</a><br> \
         <a href=""#"">Assign Professors To Courses</a><br> \
-        <a href=""#"">Assign TAs to Labs</a>"
+        <a href=""/Home/AssignTAtoLab/"">Assign TAs to Labs</a>"
 
 class EditAccount(View):
 
@@ -290,4 +293,22 @@ class DeleteAccount(View):
         users = list(User.objects.all())
 
         return render(request, "DeleteAccount.html", {'users': users, 'out': out})
+
+
+class AssignTAtoLab(View):
+
+    def get(self, request):
+        labs = list(Labs.objects.all())
+        return render(request, "AssignTAtoLab.html", {'labs': labs, 'out': ""})
+
+    def post(self, request):
+        ta = request.POST["taname"]
+
+        labid = request.POST["labid"]
+
+        out = com.command(["AssignTAToLab", labid, ta])
+
+        labs = list(Labs.objects.all())
+
+        return render(request, "AssignTAtoLab.html", {'labs': labs, 'out': out})
 

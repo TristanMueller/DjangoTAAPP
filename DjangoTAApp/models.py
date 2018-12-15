@@ -11,7 +11,7 @@ class Courses(models.Model):
     professor = models.CharField(max_length=20)
 
 class Labs(models.Model):
-    LabID = models.IntegerField(default=0)
+    LabID = models.CharField(max_length=20)
     courseID = models.CharField(max_length=20)
     tausername = models.CharField(max_length=20)
 
