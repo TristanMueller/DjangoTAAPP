@@ -120,10 +120,10 @@ class CommandHandler():
             return "Error"
 
     def currentClearance(self):
-        return app.LoggedInUser.clearance
+        return app.loggedInUser.clearance
 
     def currentUser(self):
-        return app.LoggedInUser.username
+        return app.loggedInUser.username
 
 
 def commandlist():
